@@ -352,7 +352,7 @@ async function saveToNotion(entry) {
   try {
     const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'anthropic-dangerous-direct-browser-access': 'true' },
+      headers: { 'Content-Type': 'application/json', 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 200,
@@ -442,11 +442,27 @@ CRITICAL RULES:
   try {
     const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'anthropic-dangerous-direct-browser-access': 'true' },
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': '',
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
       body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 4000, system, messages: [{ role: 'user', content: brief }] })
     });
     const data = await res.json();
-    outputText = data.content?.map(c => c.text || '').join('') || 'No response generated.';
+    console.log('API response:', JSON.stringify(data).slice(0, 300));
+    if (data.error) {
+      document.getElementById('out-body').innerHTML = `<p style="color:#c00">API Error: ${data.error.message || JSON.stringify(data.error)}</p>`;
+      btn.disabled = false; btn.textContent = 'Generate PR strategy';
+      return;
+    }
+    if (!data.content || !data.content.length) {
+      document.getElementById('out-body').innerHTML = `<p style="color:#c00">Empty response from API. Raw: ${JSON.stringify(data).slice(0,200)}</p>`;
+      btn.disabled = false; btn.textContent = 'Generate PR strategy';
+      return;
+    }
+    outputText = data.content.map(c => c.text || '').join('');
     renderMemo(outputText, 'out-body');
 
     await saveToNotion({
