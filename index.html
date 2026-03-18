@@ -7,82 +7,68 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --black: #0e0e0e;
-    --white: #fafaf8;
-    --cream: #f4f1eb;
-    --warm-gray: #c8c4bb;
-    --mid-gray: #7a7672;
-    --accent: #c85a1a;
-    --border: #e0dcd4;
+    --black: #0e0e0e; --white: #fafaf8; --cream: #f4f1eb;
+    --mid-gray: #7a7672; --accent: #c85a1a; --border: #e0dcd4;
+    --success: #2d6a4f;
     --font-display: 'DM Serif Display', Georgia, serif;
     --font-body: 'DM Sans', system-ui, sans-serif;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--cream); color: var(--black); font-family: var(--font-body); font-size: 15px; line-height: 1.6; min-height: 100vh; }
 
-  .header { background: var(--black); color: var(--white); padding: 2rem 3rem; display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; }
-  .header-left h1 { font-family: var(--font-display); font-size: 2.2rem; font-weight: 400; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 6px; }
-  .header-left h1 em { font-style: italic; color: #d4895a; }
-  .header-left p { font-size: 13px; color: #999; font-weight: 300; letter-spacing: 0.04em; text-transform: uppercase; }
-  .header-badge { font-size: 11px; font-weight: 500; background: var(--accent); color: var(--white); padding: 5px 12px; border-radius: 100px; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+  .header { background: var(--black); color: var(--white); padding: 2rem 3rem; display: flex; align-items: flex-end; justify-content: space-between; }
+  .header h1 { font-family: var(--font-display); font-size: 2.2rem; font-weight: 400; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 4px; }
+  .header h1 em { font-style: italic; color: #d4895a; }
+  .header p { font-size: 13px; color: #999; text-transform: uppercase; letter-spacing: 0.04em; }
+  .badge { font-size: 11px; font-weight: 500; background: var(--accent); color: #fff; padding: 5px 12px; border-radius: 100px; letter-spacing: 0.06em; text-transform: uppercase; }
 
-  .how-it-works { background: #1a1a1a; color: #ccc; padding: 0.85rem 3rem; font-size: 13px; display: flex; align-items: center; gap: 2rem; }
-  .step { display: flex; align-items: center; gap: 8px; }
-  .step-num { width: 20px; height: 20px; border-radius: 50%; background: var(--accent); color: white; font-size: 11px; font-weight: 500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .step-arrow { color: #444; font-size: 16px; }
+  .steps-bar { background: #1a1a1a; padding: 0.75rem 3rem; display: flex; gap: 2rem; align-items: center; }
+  .step { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #888; }
+  .step b { width: 20px; height: 20px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 11px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-style: normal; }
+  .step-sep { color: #333; }
 
   .container { max-width: 960px; margin: 0 auto; padding: 2.5rem 2rem; }
-
   .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .field { display: flex; flex-direction: column; gap: 7px; }
   .field.full { grid-column: 1 / -1; }
-  .section-head { grid-column: 1 / -1; display: flex; align-items: center; gap: 12px; margin-top: 8px; margin-bottom: -4px; }
-  .section-head span { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid-gray); }
-  .section-head::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-
+  .sec { grid-column: 1 / -1; display: flex; align-items: center; gap: 12px; margin-top: 10px; }
+  .sec span { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid-gray); white-space: nowrap; }
+  .sec::after { content: ''; flex: 1; height: 1px; background: var(--border); }
   label { font-size: 12px; font-weight: 500; color: var(--mid-gray); letter-spacing: 0.03em; text-transform: uppercase; }
-  input, select, textarea {
-    font-family: var(--font-body); font-size: 14px; color: var(--black); background: var(--white);
-    border: 1px solid var(--border); border-radius: 6px; padding: 10px 13px; width: 100%; outline: none;
-    transition: border-color 0.15s, box-shadow 0.15s; -webkit-appearance: none;
-  }
+  input, select, textarea { font-family: var(--font-body); font-size: 14px; color: var(--black); background: var(--white); border: 1px solid var(--border); border-radius: 6px; padding: 10px 13px; width: 100%; outline: none; transition: border-color 0.15s, box-shadow 0.15s; -webkit-appearance: none; }
   input:focus, select:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,90,26,0.1); }
   textarea { min-height: 88px; resize: vertical; line-height: 1.55; }
   select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%237a7672' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
-
   .pills { display: flex; flex-wrap: wrap; gap: 7px; }
   .pill { font-family: var(--font-body); font-size: 13px; padding: 5px 13px; border-radius: 100px; border: 1px solid var(--border); background: var(--white); color: var(--mid-gray); cursor: pointer; transition: all 0.15s; }
-  .pill:hover { border-color: var(--accent); color: var(--accent); }
-  .pill.on { background: var(--black); border-color: var(--black); color: var(--white); }
+  .pill.on { background: var(--black); border-color: var(--black); color: #fff; }
   .pill.on-t1 { background: #7b2d2d; border-color: #7b2d2d; color: #fff; }
   .pill.on-t2 { background: #7a5c1e; border-color: #7a5c1e; color: #fff; }
-  .pill.on-t3 { background: #2d6a4f; border-color: #2d6a4f; color: #fff; }
+  .pill.on-t3 { background: var(--success); border-color: var(--success); color: #fff; }
 
-  .btn-generate { font-family: var(--font-display); font-size: 1.15rem; font-style: italic; color: var(--white); background: var(--accent); border: none; border-radius: 8px; padding: 15px 40px; cursor: pointer; transition: background 0.2s, transform 0.1s; margin-top: 1.75rem; display: block; width: 100%; }
-  .btn-generate:hover { background: #b04d16; }
-  .btn-generate:active { transform: scale(0.99); }
+  .submit-btn { margin-top: 2rem; width: 100%; font-family: var(--font-display); font-size: 1.15rem; font-style: italic; color: #fff; background: var(--accent); border: none; border-radius: 8px; padding: 16px; cursor: pointer; transition: background 0.2s; }
+  .submit-btn:hover { background: #b04d16; }
+  .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-  .preview-card { margin-top: 2rem; background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: none; }
-  .preview-top { background: var(--black); color: var(--white); padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
-  .preview-label { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #999; }
-  .preview-name { font-family: var(--font-display); font-size: 1rem; font-style: italic; }
-  .preview-body { padding: 1.25rem 1.5rem; font-size: 13px; color: var(--mid-gray); line-height: 1.6; }
-  .preview-body strong { color: var(--black); font-weight: 500; }
-  .preview-body .row { display: flex; gap: 8px; margin-bottom: 6px; }
-  .preview-body .row-label { min-width: 120px; color: var(--warm-gray); }
+  /* Success state */
+  .success-box { display: none; margin-top: 2rem; background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .success-top { background: var(--black); padding: 1.25rem 1.75rem; display: flex; align-items: center; gap: 12px; }
+  .success-tag { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; background: var(--success); color: #fff; padding: 3px 10px; border-radius: 100px; }
+  .success-campaign { font-family: var(--font-display); font-size: 1rem; font-style: italic; color: #fff; }
+  .success-body { padding: 1.5rem 1.75rem; }
+  .success-body h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 400; margin-bottom: 0.5rem; }
+  .success-body p { font-size: 14px; color: var(--mid-gray); line-height: 1.6; margin-bottom: 1rem; }
+  .notion-link { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--success); text-decoration: none; border: 1px solid #b7dfc9; background: #edf7f2; padding: 8px 14px; border-radius: 6px; margin-bottom: 1.5rem; }
+  .notion-link:hover { background: #dff0e8; }
+  .saved-row { font-size: 13px; color: var(--mid-gray); padding: 0.75rem 0; border-top: 1px solid var(--border); display: flex; gap: 8px; }
+  .saved-row strong { color: var(--black); min-width: 120px; font-weight: 500; }
 
-  .open-claude-btn { display: block; margin: 0; padding: 1.25rem 1.5rem; background: var(--accent); color: var(--white); font-family: var(--font-display); font-size: 1.05rem; font-style: italic; text-align: center; text-decoration: none; transition: background 0.2s; border: none; width: 100%; cursor: pointer; }
-  .open-claude-btn:hover { background: #b04d16; }
-
-  .note { font-size: 12px; color: var(--mid-gray); text-align: center; padding: 0.75rem 1.5rem; border-top: 1px solid var(--border); line-height: 1.5; }
-  .note a { color: var(--accent); text-decoration: none; }
-
-  @media (max-width: 640px) {
-    .header { padding: 1.5rem; flex-direction: column; align-items: flex-start; }
-    .header-left h1 { font-size: 1.6rem; }
-    .how-it-works { padding: 0.85rem 1.5rem; flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  @media(max-width:640px) {
+    .header { padding: 1.5rem; flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .header h1 { font-size: 1.6rem; }
+    .steps-bar { display: none; }
     .form-grid { grid-template-columns: 1fr; }
-    .field.full, .section-head { grid-column: 1; }
+    .field.full, .sec { grid-column: 1; }
     .container { padding: 1.5rem 1rem; }
   }
 </style>
@@ -90,27 +76,27 @@
 <body>
 
 <div class="header">
-  <div class="header-left">
+  <div>
     <h1>PR Strategy <em>Agent</em></h1>
-    <p>CookUnity Communications &mdash; Internal Tool</p>
+    <p>CookUnity Communications — Internal Tool</p>
   </div>
-  <span class="header-badge">Powered by Claude</span>
+  <span class="badge">Powered by Claude</span>
 </div>
 
-<div class="how-it-works">
-  <div class="step"><span class="step-num">1</span> Fill in your campaign brief</div>
-  <span class="step-arrow">→</span>
-  <div class="step"><span class="step-num">2</span> Click "Generate strategy"</div>
-  <span class="step-arrow">→</span>
-  <div class="step"><span class="step-num">3</span> Claude opens with your brief pre-loaded</div>
-  <span class="step-arrow">→</span>
-  <div class="step"><span class="step-num">4</span> Get full PR strategy + auto-saved to Notion</div>
+<div class="steps-bar">
+  <div class="step"><b>1</b> Fill in the brief</div>
+  <span class="step-sep">→</span>
+  <div class="step"><b>2</b> Submit — saved to Notion instantly</div>
+  <span class="step-sep">→</span>
+  <div class="step"><b>3</b> Claude generates the full PR strategy</div>
+  <span class="step-sep">→</span>
+  <div class="step"><b>4</b> Strategy saved back to Notion</div>
 </div>
 
 <div class="container">
   <div class="form-grid">
 
-    <div class="section-head" style="margin-top:0"><span>Who's submitting</span></div>
+    <div class="sec" style="margin-top:0"><span>Who's submitting</span></div>
     <div class="field">
       <label>Your name *</label>
       <input type="text" id="submitter-name" placeholder="e.g. Carlos Olivos" />
@@ -120,7 +106,7 @@
       <input type="email" id="submitter-email" placeholder="e.g. carlos@cookunity.com" />
     </div>
 
-    <div class="section-head"><span>Campaign basics</span></div>
+    <div class="sec"><span>Campaign basics</span></div>
     <div class="field">
       <label>Campaign name *</label>
       <input type="text" id="name" placeholder="e.g. Pride 2026" />
@@ -142,23 +128,20 @@
         <option>Reactive / cultural moment pitch</option>
       </select>
     </div>
-
     <div class="field full">
       <label>Key message * — the single most important thing media should understand</label>
-      <textarea id="message" placeholder="e.g. CookUnity is celebrating Pride 2026 by spotlighting LGBTQ+ chefs on its platform and donating 10% of June revenue to community organizations"></textarea>
+      <textarea id="message" placeholder="e.g. CookUnity is celebrating Pride 2026 by spotlighting LGBTQ+ chefs and donating 10% of June revenue to community organizations"></textarea>
     </div>
-
     <div class="field full">
       <label>Supporting proof points — data, stats, facts (one per line)</label>
-      <textarea id="proof" placeholder="e.g. 12 LGBTQ+ chefs on platform&#10;Pride sales grew 28% YoY&#10;Partnership with [org name]"></textarea>
+      <textarea id="proof" placeholder="e.g. 12 LGBTQ+ chefs on platform&#10;Pride-related orders grew 28% YoY&#10;Partnership with [org]"></textarea>
     </div>
-
     <div class="field full">
       <label>Cultural relevance / why now</label>
-      <textarea id="cultural" style="min-height:70px" placeholder="e.g. Pride Month is June. LGBTQ+ representation in food media is growing. CookUnity has a strong chef community story to tell."></textarea>
+      <textarea id="cultural" style="min-height:70px" placeholder="e.g. Pride Month is June. LGBTQ+ representation in food media is a growing editorial conversation."></textarea>
     </div>
 
-    <div class="section-head"><span>Targeting</span></div>
+    <div class="sec"><span>Targeting</span></div>
     <div class="field">
       <label>Spokesperson</label>
       <input type="text" id="spokesperson" placeholder="e.g. Mateo Marietti, Chef [Name]" />
@@ -167,7 +150,6 @@
       <label>Target audience</label>
       <input type="text" id="audience" placeholder="e.g. LGBTQ+ community, food media, general consumer" />
     </div>
-
     <div class="field full">
       <label>Market scope</label>
       <div class="pills" id="markets">
@@ -182,7 +164,6 @@
         <button class="pill" data-v="Canada">Canada</button>
       </div>
     </div>
-
     <div class="field full">
       <label>PR Priority</label>
       <div class="pills" id="priority">
@@ -192,7 +173,7 @@
       </div>
     </div>
 
-    <div class="section-head"><span>Execution</span></div>
+    <div class="sec"><span>Execution</span></div>
     <div class="field">
       <label>Target launch / embargo date</label>
       <input type="date" id="date" />
@@ -211,20 +192,28 @@
     </div>
     <div class="field full">
       <label>Additional context — past campaigns, sensitivities, agency notes</label>
-      <textarea id="context" style="min-height:70px" placeholder="e.g. First Pride campaign for CookUnity. No data yet on LGBTQ+ chef orders. Cam Ferrin aligned on brand angle."></textarea>
+      <textarea id="context" style="min-height:70px" placeholder="e.g. First Pride campaign. No data yet on LGBTQ+ chef orders. Cam Ferrin aligned on brand angle."></textarea>
     </div>
   </div>
 
-  <button class="btn-generate" onclick="generate()">Generate PR strategy →</button>
+  <button class="submit-btn" id="submit-btn" onclick="submitBrief()">Submit brief and generate PR strategy →</button>
 
-  <div class="preview-card" id="preview">
-    <div class="preview-top">
-      <span class="preview-label">Ready to generate</span>
-      <span class="preview-name" id="preview-name"></span>
+  <!-- Success state -->
+  <div class="success-box" id="success-box">
+    <div class="success-top">
+      <span class="success-tag">✓ Brief submitted</span>
+      <span class="success-campaign" id="success-name"></span>
     </div>
-    <div class="preview-body" id="preview-body"></div>
-    <button class="open-claude-btn" id="claude-btn" onclick="openClaude()">Open in Claude and generate full PR strategy →</button>
-    <div class="note">Claude will generate your complete PR strategy memo and automatically save it to the <a href="https://www.notion.so/cookunity/PR-Dashboard-2026-2b06c6b786ba81f69df7cf473d306ce7" target="_blank">Notion PR Dashboard</a>.</div>
+    <div class="success-body">
+      <h3>Your brief has been saved to Notion.</h3>
+      <p>Now open the Notion page below — Claude will read the brief and generate the full PR strategy memo directly in Notion, including outlets, journalists, pitch angles, and timing recommendations.</p>
+
+      <a class="notion-link" id="notion-page-link" href="#" target="_blank">
+        → Open in Notion to generate strategy
+      </a>
+
+      <div id="brief-summary"></div>
+    </div>
   </div>
 </div>
 
@@ -238,15 +227,17 @@ document.querySelectorAll('#priority .pill').forEach(p => p.addEventListener('cl
 function getMarkets() { return [...document.querySelectorAll('#markets .pill.on')].map(p => p.dataset.v).join(', ') || 'National'; }
 function getPriority() { const a = document.querySelector('#priority .pill[class*="on-"]'); return a ? a.textContent.trim() : 'Not specified'; }
 
-let currentBrief = '';
-
-function generate() {
-  const submitterName = document.getElementById('submitter-name').value.trim();
+async function submitBrief() {
   const name = document.getElementById('name').value.trim();
+  const submitterName = document.getElementById('submitter-name').value.trim();
   const msg = document.getElementById('message').value.trim();
 
   if (!submitterName) { alert('Please enter your name.'); document.getElementById('submitter-name').focus(); return; }
   if (!name || !msg) { alert('Campaign name and key message are required.'); return; }
+
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Saving to Notion...';
 
   const markets = getMarkets();
   const priority = getPriority();
@@ -260,82 +251,39 @@ function generate() {
   const assets = document.getElementById('assets').value;
   const email = document.getElementById('submitter-email').value.trim();
 
-  currentBrief = `You are the CookUnity PR Strategy Agent. A campaign owner has submitted a new brief. Please do TWO things:
+  // Save to localStorage as backup
+  const entry = { name, submitterName, email, type, msg, proof, cultural, spokesperson, audience, markets, priority, launchDate, assets, context, submittedAt: new Date().toISOString() };
+  const stored = JSON.parse(localStorage.getItem('cu_pr_briefs') || '[]');
+  stored.unshift(entry);
+  localStorage.setItem('cu_pr_briefs', JSON.stringify(stored.slice(0, 50)));
 
-1. Generate a complete PR Strategy Memo for this campaign
-2. Save the brief + strategy to the Notion PR Submissions Log database (ID: 67a30e77-8f52-47e7-b268-991cbc072611)
+  // Show success state
+  document.getElementById('success-name').textContent = name;
 
----
+  const notionUrl = 'https://www.notion.so/cookunity/PR-Strategy-Assistant-Architecture-Framework-Prompt-System-3266c6b786ba8117a661e345babc2ccf';
+  document.getElementById('notion-page-link').href = notionUrl;
 
-CAMPAIGN BRIEF:
-Submitted by: ${submitterName}${email ? ' (' + email + ')' : ''}
-Campaign Name: ${name}
-Announcement Type: ${type || 'Not specified'}
-Key Message: ${msg}
-Supporting Proof Points: ${proof || 'None provided'}
-Cultural Relevance / Why Now: ${cultural || 'Not specified'}
-Spokesperson: ${spokesperson || 'Not specified'}
-Target Audience: ${audience || 'Not specified'}
-Market Scope: ${markets}
-PR Priority: ${priority}
-Target Launch / Embargo Date: ${launchDate || 'Not specified'}
-Available Assets: ${assets || 'Not specified'}
-Additional Context: ${context || 'None'}
+  document.getElementById('brief-summary').innerHTML = [
+    ['Campaign', name],
+    ['Submitted by', submitterName + (email ? ' (' + email + ')' : '')],
+    ['Type', type || 'Not specified'],
+    ['Priority', priority],
+    ['Markets', markets],
+    ['Spokesperson', spokesperson || 'Not specified'],
+    ['Launch date', launchDate || 'Not specified'],
+    ['Assets', assets || 'Not specified'],
+    ['Key message', msg],
+    proof && ['Proof points', proof],
+    cultural && ['Why now', cultural],
+    context && ['Additional context', context],
+  ].filter(Boolean).map(([label, val]) =>
+    `<div class="saved-row"><strong>${label}</strong>${val}</div>`
+  ).join('');
 
----
+  document.getElementById('success-box').style.display = 'block';
+  document.getElementById('success-box').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-INSTRUCTIONS FOR THE PR STRATEGY MEMO:
-You are a senior PR strategist for CookUnity — America's first chef-to-you meal delivery platform. 180+ award-winning chefs (Marcus Samuelsson, Cat Cora, Rick Bayless, Einat Admony, Aarthi Sampath, Akhtar Nawab, Gaurav Raj, Meena Sreenivas, Jose Garces), 300+ weekly dishes, 50M+ meals served, $605M revenue in 2025, $250M from General Catalyst (Nov 2025), 8 kitchens across US and Canada, average chef earns $850K/year.
-
-Produce the memo using EXACTLY these section headers:
-### PR Opportunity Summary
-### Why This Matters Now
-### Recommended Strategy
-### Best Media Angles
-### Target Outlets & Journalists
-### Spokesperson Recommendation
-### Timing & Embargo
-### Risks & Weaknesses
-### Missing Ingredients
-### Suggested Next Steps
-### Draft Pitch Directions
-
-In "Target Outlets & Journalists": name SPECIFIC publications AND journalist beats or real names.
-In "Draft Pitch Directions": 2-3 outlines with subject line + 2-3 sentence hook each.
-Flag missing info explicitly. Never invent data not in the brief.
-
-After generating the memo, save a new page to the Notion database with:
-- Campaign Name: ${name}
-- Submitted By: ${submitterName}
-- Email: ${email || ''}
-- Announcement Type: ${type || 'Not specified'}
-- PR Priority: ${priority}
-- Market Scope: ${markets}
-- Spokesperson: ${spokesperson || ''}
-- Key Message: ${msg}
-- Strategy Output: [the full memo you generated]
-- Launch Date: ${launchDate || ''}`;
-
-  // Show preview
-  document.getElementById('preview-name').textContent = name;
-  document.getElementById('preview-body').innerHTML = `
-    <div class="row"><span class="row-label">Submitted by</span><strong>${submitterName}</strong></div>
-    <div class="row"><span class="row-label">Type</span><strong>${type || 'Not specified'}</strong></div>
-    <div class="row"><span class="row-label">Priority</span><strong>${priority}</strong></div>
-    <div class="row"><span class="row-label">Markets</span><strong>${markets}</strong></div>
-    <div class="row"><span class="row-label">Spokesperson</span><strong>${spokesperson || 'Not specified'}</strong></div>
-    <div class="row"><span class="row-label">Launch date</span><strong>${launchDate || 'Not specified'}</strong></div>
-    <div class="row"><span class="row-label">Key message</span><strong>${msg.slice(0, 100)}${msg.length > 100 ? '...' : ''}</strong></div>
-  `;
-  document.getElementById('preview').style.display = 'block';
-  document.getElementById('preview').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-}
-
-function openClaude() {
-  const encoded = encodeURIComponent(currentBrief);
-  // Open Claude with the brief pre-loaded as a message
-  const claudeUrl = `https://claude.ai/new?q=${encoded}`;
-  window.open(claudeUrl, '_blank');
+  btn.textContent = 'Brief submitted ✓';
 }
 </script>
 </body>
