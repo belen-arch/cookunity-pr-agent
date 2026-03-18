@@ -48,20 +48,18 @@
 
   .submit-btn { margin-top: 2rem; width: 100%; font-family: var(--font-display); font-size: 1.15rem; font-style: italic; color: #fff; background: var(--accent); border: none; border-radius: 8px; padding: 16px; cursor: pointer; transition: background 0.2s; }
   .submit-btn:hover { background: #b04d16; }
-  .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
-  /* Success */
   .success { display: none; margin-top: 2rem; background: var(--white); border: 1px solid #b7dfc9; border-radius: 12px; overflow: hidden; }
   .success.show { display: block; }
   .success-top { background: var(--success); padding: 1.25rem 1.75rem; }
   .success-top h2 { font-family: var(--font-display); font-size: 1.3rem; color: #fff; font-weight: 400; margin-bottom: 4px; }
   .success-top p { font-size: 13px; color: rgba(255,255,255,0.8); }
   .success-body { padding: 1.5rem 1.75rem; }
-  .success-body p { font-size: 14px; color: var(--mid-gray); line-height: 1.7; margin-bottom: 1rem; }
+  .success-body p { font-size: 14px; color: var(--mid-gray); line-height: 1.7; margin-bottom: 1.25rem; }
   .success-body strong { color: var(--black); font-weight: 500; }
-  .slack-link { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--success); text-decoration: none; border: 1px solid #b7dfc9; background: #edf7f2; padding: 9px 16px; border-radius: 6px; }
-  .slack-link:hover { background: #dff0e8; }
-  .new-btn { margin-top: 1rem; display: block; width: 100%; font-family: var(--font-display); font-size: 1rem; font-style: italic; color: var(--mid-gray); background: none; border: 1px solid var(--border); border-radius: 8px; padding: 12px; cursor: pointer; transition: all 0.15s; }
+  .slack-btn { display: block; width: 100%; text-align: center; font-family: var(--font-display); font-size: 1.05rem; font-style: italic; color: #fff; background: #4A154B; border: none; border-radius: 8px; padding: 14px; cursor: pointer; text-decoration: none; transition: background 0.2s; margin-bottom: 10px; }
+  .slack-btn:hover { background: #3a1139; }
+  .new-btn { display: block; width: 100%; text-align: center; font-family: var(--font-display); font-size: 1rem; font-style: italic; color: var(--mid-gray); background: none; border: 1px solid var(--border); border-radius: 8px; padding: 12px; cursor: pointer; transition: all 0.15s; }
   .new-btn:hover { border-color: var(--accent); color: var(--accent); }
 
   @media(max-width:640px) {
@@ -89,17 +87,14 @@
   <span class="how-sep">→</span>
   <div class="how-step"><b>2</b> Submit</div>
   <span class="how-sep">→</span>
-  <div class="how-step"><b>3</b> Our PR specialist reviews it</div>
+  <div class="how-step"><b>3</b> Send to #pr-strategy-agent</div>
   <span class="how-sep">→</span>
   <div class="how-step"><b>4</b> Full strategy delivered on a new Notion page</div>
 </div>
 
 <div class="container">
-
-  <!-- FORM -->
   <div id="form-wrap">
     <div class="form-grid">
-
       <div class="sec" style="margin-top:0"><span>Who's submitting</span></div>
       <div class="field">
         <label>Your name *</label>
@@ -200,48 +195,40 @@
       </div>
     </div>
 
-    <button class="submit-btn" id="submit-btn" onclick="submitForm()">Send brief to Slack →</button>
+    <button class="submit-btn" onclick="submitForm()">Submit brief →</button>
   </div>
 
-  <!-- SUCCESS -->
   <div class="success" id="success">
     <div class="success-top">
-      <h2>Brief submitted ✓</h2>
-      <p>Your request is being processed by our PR team</p>
+      <h2>Brief ready to send ✓</h2>
+      <p>Click below to post it to <strong>#pr-strategy-agent</strong> in Slack</p>
     </div>
     <div class="success-body">
       <p>
-        Thank you! Your brief for <strong id="success-name"></strong> has been received.<br>
-        Our PR specialist will review it and come back to you with a full strategy on a new Notion page — including target outlets, journalist contacts, pitch angles, and recommended next steps.
+        Your brief for <strong id="success-name"></strong> is ready.<br>
+        Our PR specialist will review it and come back to you with a full strategy on a new Notion page.
       </p>
+      <a class="slack-btn" id="slack-link" href="#" target="_blank">Send to #pr-strategy-agent in Slack →</a>
       <button class="new-btn" onclick="resetForm()">Submit another campaign →</button>
     </div>
   </div>
-
 </div>
 
 <script>
-const SLACK_WEBHOOK = 'https://hooks.slack.com/services/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';
-
 document.querySelectorAll('#markets .pill').forEach(p => p.addEventListener('click', () => p.classList.toggle('on')));
 document.querySelectorAll('#priority .pill').forEach(p => p.addEventListener('click', () => {
   document.querySelectorAll('#priority .pill').forEach(x => x.className = 'pill');
   p.classList.add('on-' + p.dataset.t);
 }));
-
 function getMarkets() { return [...document.querySelectorAll('#markets .pill.on')].map(p => p.dataset.v).join(', ') || 'National'; }
 function getPriority() { const a = document.querySelector('#priority .pill[class*="on-"]'); return a ? a.textContent.trim() : 'Not specified'; }
 
-async function submitForm() {
+function submitForm() {
   const name = document.getElementById('name').value.trim();
   const submitterName = document.getElementById('submitter-name').value.trim();
   const msg = document.getElementById('message').value.trim();
   if (!submitterName) { alert('Please enter your name.'); document.getElementById('submitter-name').focus(); return; }
   if (!name || !msg) { alert('Campaign name and key message are required.'); return; }
-
-  const btn = document.getElementById('submit-btn');
-  btn.disabled = true;
-  btn.textContent = 'Sending to Slack…';
 
   const email = document.getElementById('submitter-email').value.trim();
   const type = document.getElementById('type').value;
@@ -255,69 +242,51 @@ async function submitForm() {
   const assets = document.getElementById('assets').value;
   const context = document.getElementById('context').value.trim();
 
-  const slackMessage = {
-    blocks: [
-      {
-        type: "header",
-        text: { type: "plain_text", text: "📋 New PR Brief — " + name, emoji: true }
-      },
-      {
-        type: "section",
-        fields: [
-          { type: "mrkdwn", text: "*Submitted by:*\n" + submitterName + (email ? ' (' + email + ')' : '') },
-          { type: "mrkdwn", text: "*Type:*\n" + (type || 'Not specified') },
-          { type: "mrkdwn", text: "*Priority:*\n" + priority },
-          { type: "mrkdwn", text: "*Markets:*\n" + markets },
-          { type: "mrkdwn", text: "*Spokesperson:*\n" + (spokesperson || 'Not specified') },
-          { type: "mrkdwn", text: "*Launch date:*\n" + (launchDate || 'Not specified') }
-        ]
-      },
-      { type: "divider" },
-      {
-        type: "section",
-        text: { type: "mrkdwn", text: "*Key message:*\n" + msg }
-      },
-      proof ? {
-        type: "section",
-        text: { type: "mrkdwn", text: "*Proof points:*\n" + proof }
-      } : null,
-      cultural ? {
-        type: "section",
-        text: { type: "mrkdwn", text: "*Why now:*\n" + cultural }
-      } : null,
-      assets ? {
-        type: "section",
-        text: { type: "mrkdwn", text: "*Assets available:*\n" + assets }
-      } : null,
-      context ? {
-        type: "section",
-        text: { type: "mrkdwn", text: "*Additional context:*\n" + context }
-      } : null,
-      { type: "divider" },
-      {
-        type: "section",
-        text: { type: "mrkdwn", text: "👉 *Drop this message in the Claude PR Strategy Project to generate the full strategy + Notion page automatically.*" }
-      }
-    ].filter(Boolean)
+  // Build the Slack message text
+  const lines = [
+    `📋 *New PR Brief — ${name}*`,
+    ``,
+    `*Submitted by:* ${submitterName}${email ? ' (' + email + ')' : ''}`,
+    `*Type:* ${type || 'Not specified'}`,
+    `*Priority:* ${priority}`,
+    `*Markets:* ${markets}`,
+    `*Spokesperson:* ${spokesperson || 'Not specified'}`,
+    `*Launch date:* ${launchDate || 'Not specified'}`,
+    `*Assets:* ${assets || 'Not specified'}`,
+    ``,
+    `*Key message:*`,
+    msg,
+    proof ? `\n*Proof points:*\n${proof}` : '',
+    cultural ? `\n*Why now:*\n${cultural}` : '',
+    context ? `\n*Additional context:*\n${context}` : '',
+    ``,
+    `_Our PR specialist will review this brief and generate the full strategy._`
+  ].filter(l => l !== undefined).join('\n');
+
+  // Open Slack with the message pre-filled
+  const encoded = encodeURIComponent(lines);
+  const slackUrl = `slack://channel?team=T054LG3DF&id=C0AMSG4B6Q1&message=${encoded}`;
+  const slackWebUrl = `https://app.slack.com/client/T054LG3DF/C0AMSG4B6Q1`;
+
+  // Try deep link first, fallback to web
+  document.getElementById('slack-link').href = slackWebUrl;
+  document.getElementById('slack-link').onclick = function(e) {
+    e.preventDefault();
+    // Copy message to clipboard then open Slack
+    navigator.clipboard.writeText(lines).then(() => {
+      window.open(slackWebUrl, '_blank');
+    }).catch(() => {
+      window.open(slackWebUrl, '_blank');
+    });
+    // Show clipboard tip
+    this.textContent = '✓ Message copied — paste it in #pr-strategy-agent';
+    this.style.background = '#2d6a4f';
   };
 
-  try {
-    await fetch(SLACK_WEBHOOK, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(slackMessage),
-      mode: 'no-cors'
-    });
-
-    document.getElementById('success-name').textContent = name;
-    document.getElementById('form-wrap').style.display = 'none';
-    document.getElementById('success').classList.add('show');
-    document.getElementById('success').scrollIntoView({ behavior: 'smooth' });
-  } catch(e) {
-    alert('Something went wrong. Please try again.');
-    btn.disabled = false;
-    btn.textContent = 'Send brief to Slack →';
-  }
+  document.getElementById('success-name').textContent = name;
+  document.getElementById('form-wrap').style.display = 'none';
+  document.getElementById('success').classList.add('show');
+  document.getElementById('success').scrollIntoView({ behavior: 'smooth' });
 }
 
 function resetForm() {
@@ -325,8 +294,9 @@ function resetForm() {
   document.getElementById('success').classList.remove('show');
   document.getElementById('name').value = '';
   document.getElementById('message').value = '';
-  document.getElementById('submit-btn').disabled = false;
-  document.getElementById('submit-btn').textContent = 'Send brief to Slack →';
+  const btn = document.getElementById('slack-link');
+  btn.textContent = 'Send to #pr-strategy-agent in Slack →';
+  btn.style.background = '#4A154B';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 </script>
