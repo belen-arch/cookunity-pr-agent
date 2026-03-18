@@ -22,6 +22,11 @@
   .header p { font-size: 13px; color: #999; text-transform: uppercase; letter-spacing: 0.04em; }
   .badge { font-size: 11px; font-weight: 500; background: var(--accent); color: #fff; padding: 5px 12px; border-radius: 100px; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
 
+  .how { background: #1a1a1a; padding: 0.75rem 3rem; display: flex; gap: 2rem; align-items: center; flex-wrap: wrap; }
+  .how-step { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #888; }
+  .how-step b { width: 20px; height: 20px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 11px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .how-sep { color: #333; font-size: 16px; }
+
   .container { max-width: 960px; margin: 0 auto; padding: 2.5rem 2rem; }
   .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .field { display: flex; flex-direction: column; gap: 7px; }
@@ -45,48 +50,24 @@
   .submit-btn:hover { background: #b04d16; }
   .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
-  /* Loading */
-  .loading { display: none; margin-top: 2rem; background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 2.5rem; text-align: center; }
-  .loading.show { display: block; }
-  .spinner { display: inline-flex; gap: 6px; margin-bottom: 1rem; }
-  .spinner span { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: bounce 1.2s infinite ease-in-out; }
-  .spinner span:nth-child(2) { animation-delay: 0.2s; }
-  .spinner span:nth-child(3) { animation-delay: 0.4s; }
-  @keyframes bounce { 0%,80%,100%{transform:scale(0.6);opacity:0.4} 40%{transform:scale(1);opacity:1} }
-  .loading p { font-size: 14px; color: var(--mid-gray); }
-  .loading-steps { margin-top: 1rem; display: flex; flex-direction: column; gap: 8px; align-items: center; }
-  .loading-step { font-size: 13px; color: var(--warm-gray); display: flex; align-items: center; gap: 8px; }
-  .loading-step.done { color: var(--success); }
-  .loading-step.active { color: var(--accent); font-weight: 500; }
-
-  /* Output */
-  .output-wrap { display: none; margin-top: 2rem; }
-  .output-wrap.show { display: block; }
-
-  .notion-banner { background: #edf7f2; border: 1px solid #b7dfc9; border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
-  .notion-banner-text { font-size: 14px; color: var(--success); font-weight: 500; }
-  .notion-banner-sub { font-size: 12px; color: #4a9470; margin-top: 2px; }
-  .notion-link { font-size: 13px; font-weight: 500; color: var(--success); text-decoration: none; border: 1px solid #b7dfc9; background: #fff; padding: 8px 16px; border-radius: 6px; white-space: nowrap; }
-  .notion-link:hover { background: #dff0e8; }
-
-  .memo-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-  .memo-top { background: var(--black); color: var(--white); padding: 1.25rem 1.75rem; display: flex; align-items: center; gap: 14px; }
-  .memo-tag { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; background: var(--accent); color: #fff; padding: 3px 10px; border-radius: 100px; }
-  .memo-name { font-family: var(--font-display); font-size: 1.05rem; font-style: italic; }
-  .memo-body { padding: 1.75rem; font-size: 14.5px; line-height: 1.75; }
-  .memo-body h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 400; margin: 1.5rem 0 0.5rem; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
-  .memo-body h3:first-child { margin-top: 0; }
-  .memo-body p { margin-bottom: 0.75rem; }
-  .memo-body ul { padding-left: 1.25rem; margin-bottom: 0.75rem; }
-  .memo-body li { margin-bottom: 4px; }
-  .memo-body strong { font-weight: 500; }
-  .memo-footer { border-top: 1px solid var(--border); padding: 1rem 1.75rem; display: flex; justify-content: flex-end; }
-  .copy-btn { font-family: var(--font-body); font-size: 13px; color: var(--mid-gray); background: none; border: 1px solid var(--border); border-radius: 6px; padding: 7px 16px; cursor: pointer; transition: all 0.15s; }
-  .copy-btn:hover { color: var(--black); border-color: var(--warm-gray); }
+  /* Success */
+  .success { display: none; margin-top: 2rem; background: var(--white); border: 1px solid #b7dfc9; border-radius: 12px; overflow: hidden; }
+  .success.show { display: block; }
+  .success-top { background: var(--success); padding: 1.25rem 1.75rem; }
+  .success-top h2 { font-family: var(--font-display); font-size: 1.3rem; color: #fff; font-weight: 400; margin-bottom: 4px; }
+  .success-top p { font-size: 13px; color: rgba(255,255,255,0.8); }
+  .success-body { padding: 1.5rem 1.75rem; }
+  .success-body p { font-size: 14px; color: var(--mid-gray); line-height: 1.7; margin-bottom: 1rem; }
+  .success-body strong { color: var(--black); font-weight: 500; }
+  .slack-link { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--success); text-decoration: none; border: 1px solid #b7dfc9; background: #edf7f2; padding: 9px 16px; border-radius: 6px; }
+  .slack-link:hover { background: #dff0e8; }
+  .new-btn { margin-top: 1rem; display: block; width: 100%; font-family: var(--font-display); font-size: 1rem; font-style: italic; color: var(--mid-gray); background: none; border: 1px solid var(--border); border-radius: 8px; padding: 12px; cursor: pointer; transition: all 0.15s; }
+  .new-btn:hover { border-color: var(--accent); color: var(--accent); }
 
   @media(max-width:640px) {
     .header { padding: 1.5rem; flex-direction: column; align-items: flex-start; gap: 1rem; }
     .header h1 { font-size: 1.6rem; }
+    .how { padding: 0.75rem 1.5rem; }
     .form-grid { grid-template-columns: 1fr; }
     .field.full, .sec { grid-column: 1; }
     .container { padding: 1.5rem 1rem; }
@@ -103,237 +84,250 @@
   <span class="badge">Powered by Claude</span>
 </div>
 
+<div class="how">
+  <div class="how-step"><b>1</b> Fill in the brief</div>
+  <span class="how-sep">→</span>
+  <div class="how-step"><b>2</b> Submit</div>
+  <span class="how-sep">→</span>
+  <div class="how-step"><b>3</b> Our PR specialist reviews it</div>
+  <span class="how-sep">→</span>
+  <div class="how-step"><b>4</b> Full strategy delivered on a new Notion page</div>
+</div>
+
 <div class="container">
-  <div class="form-grid">
 
-    <div class="sec" style="margin-top:0"><span>Who's submitting</span></div>
-    <div class="field">
-      <label>Your name *</label>
-      <input type="text" id="submitter-name" placeholder="e.g. Carlos Olivos" />
-    </div>
-    <div class="field">
-      <label>Your email</label>
-      <input type="email" id="submitter-email" placeholder="e.g. carlos@cookunity.com" />
-    </div>
+  <!-- FORM -->
+  <div id="form-wrap">
+    <div class="form-grid">
 
-    <div class="sec"><span>Campaign basics</span></div>
-    <div class="field">
-      <label>Campaign name *</label>
-      <input type="text" id="name" placeholder="e.g. Pride 2026" />
-    </div>
-    <div class="field">
-      <label>Announcement type</label>
-      <select id="type">
-        <option value="">Select...</option>
-        <option>Food trend / data story</option>
-        <option>Chef launch / partnership</option>
-        <option>Brand campaign</option>
-        <option>Funding / business milestone</option>
-        <option>Sports / lifestyle partnership</option>
-        <option>Market launch / expansion</option>
-        <option>Cultural moment</option>
-        <option>Product launch</option>
-        <option>Corporate news</option>
-        <option>Seasonal campaign</option>
-        <option>Reactive pitch</option>
-      </select>
-    </div>
-    <div class="field full">
-      <label>Key message * — the single most important thing media should understand</label>
-      <textarea id="message" placeholder="e.g. CookUnity is celebrating Pride 2026 by spotlighting LGBTQ+ chefs and donating 10% of June revenue to community organizations"></textarea>
-    </div>
-    <div class="field full">
-      <label>Supporting proof points — data, stats, facts (one per line)</label>
-      <textarea id="proof" placeholder="e.g. 12 LGBTQ+ chefs on platform&#10;Pride orders grew 28% YoY&#10;Partnership with [org]"></textarea>
-    </div>
-    <div class="field full">
-      <label>Cultural relevance / why now</label>
-      <textarea id="cultural" style="min-height:70px" placeholder="e.g. Pride Month is June. LGBTQ+ representation in food media is growing."></textarea>
-    </div>
+      <div class="sec" style="margin-top:0"><span>Who's submitting</span></div>
+      <div class="field">
+        <label>Your name *</label>
+        <input type="text" id="submitter-name" placeholder="e.g. Carlos Olivos" />
+      </div>
+      <div class="field">
+        <label>Your email</label>
+        <input type="email" id="submitter-email" placeholder="e.g. carlos@cookunity.com" />
+      </div>
 
-    <div class="sec"><span>Targeting</span></div>
-    <div class="field">
-      <label>Spokesperson</label>
-      <input type="text" id="spokesperson" placeholder="e.g. Mateo Marietti, Chef [Name]" />
-    </div>
-    <div class="field">
-      <label>Target audience</label>
-      <input type="text" id="audience" placeholder="e.g. LGBTQ+ community, food media" />
-    </div>
-    <div class="field full">
-      <label>Market scope</label>
-      <div class="pills" id="markets">
-        <button class="pill on" data-v="National">National</button>
-        <button class="pill" data-v="NYC">NYC</button>
-        <button class="pill" data-v="LA">LA</button>
-        <button class="pill" data-v="Miami">Miami</button>
-        <button class="pill" data-v="Chicago">Chicago</button>
-        <button class="pill" data-v="Atlanta">Atlanta</button>
-        <button class="pill" data-v="Seattle">Seattle</button>
-        <button class="pill" data-v="Austin">Austin</button>
-        <button class="pill" data-v="Canada">Canada</button>
+      <div class="sec"><span>Campaign basics</span></div>
+      <div class="field">
+        <label>Campaign name *</label>
+        <input type="text" id="name" placeholder="e.g. Pride 2026" />
+      </div>
+      <div class="field">
+        <label>Announcement type</label>
+        <select id="type">
+          <option value="">Select...</option>
+          <option>Food trend / data story</option>
+          <option>Chef launch / partnership</option>
+          <option>Brand campaign</option>
+          <option>Funding / business milestone</option>
+          <option>Sports / lifestyle partnership</option>
+          <option>Market launch / expansion</option>
+          <option>Cultural moment</option>
+          <option>Product launch</option>
+          <option>Corporate news</option>
+          <option>Seasonal campaign</option>
+          <option>Reactive pitch</option>
+        </select>
+      </div>
+      <div class="field full">
+        <label>Key message * — the single most important thing media should understand</label>
+        <textarea id="message" placeholder="e.g. CookUnity is celebrating Pride 2026 by spotlighting LGBTQ+ chefs and donating 10% of June revenue to community organizations"></textarea>
+      </div>
+      <div class="field full">
+        <label>Supporting proof points — data, stats, facts (one per line)</label>
+        <textarea id="proof" placeholder="e.g. 12 LGBTQ+ chefs on platform&#10;Pride orders grew 28% YoY&#10;Partnership with [org]"></textarea>
+      </div>
+      <div class="field full">
+        <label>Cultural relevance / why now</label>
+        <textarea id="cultural" style="min-height:70px" placeholder="e.g. Pride Month is June. LGBTQ+ representation in food media is growing."></textarea>
+      </div>
+
+      <div class="sec"><span>Targeting</span></div>
+      <div class="field">
+        <label>Spokesperson</label>
+        <input type="text" id="spokesperson" placeholder="e.g. Mateo Marietti, Chef [Name]" />
+      </div>
+      <div class="field">
+        <label>Target audience</label>
+        <input type="text" id="audience" placeholder="e.g. LGBTQ+ community, food media" />
+      </div>
+      <div class="field full">
+        <label>Market scope</label>
+        <div class="pills" id="markets">
+          <button class="pill on" data-v="National">National</button>
+          <button class="pill" data-v="NYC">NYC</button>
+          <button class="pill" data-v="LA">LA</button>
+          <button class="pill" data-v="Miami">Miami</button>
+          <button class="pill" data-v="Chicago">Chicago</button>
+          <button class="pill" data-v="Atlanta">Atlanta</button>
+          <button class="pill" data-v="Seattle">Seattle</button>
+          <button class="pill" data-v="Austin">Austin</button>
+          <button class="pill" data-v="Canada">Canada</button>
+        </div>
+      </div>
+      <div class="field full">
+        <label>PR Priority</label>
+        <div class="pills" id="priority">
+          <button class="pill" data-t="t1">Tier 1 — National top-tier</button>
+          <button class="pill" data-t="t2">Tier 2 — Trade + lifestyle</button>
+          <button class="pill" data-t="t3">Tier 3 — Local / niche</button>
+        </div>
+      </div>
+
+      <div class="sec"><span>Execution</span></div>
+      <div class="field">
+        <label>Target launch / embargo date</label>
+        <input type="date" id="date" />
+      </div>
+      <div class="field">
+        <label>Available assets</label>
+        <select id="assets">
+          <option value="">Select...</option>
+          <option>Press release draft ready</option>
+          <option>Chef quotes approved</option>
+          <option>Photography available</option>
+          <option>Video available</option>
+          <option>Data brief ready</option>
+          <option>None yet</option>
+        </select>
+      </div>
+      <div class="field full">
+        <label>Additional context — past campaigns, sensitivities, agency notes</label>
+        <textarea id="context" style="min-height:70px" placeholder="e.g. First Pride campaign. No LGBTQ+ order data yet. Cam Ferrin aligned on brand angle."></textarea>
       </div>
     </div>
-    <div class="field full">
-      <label>PR Priority</label>
-      <div class="pills" id="priority">
-        <button class="pill" data-t="t1">Tier 1 — National top-tier</button>
-        <button class="pill" data-t="t2">Tier 2 — Trade + lifestyle</button>
-        <button class="pill" data-t="t3">Tier 3 — Local / niche</button>
-      </div>
-    </div>
 
-    <div class="sec"><span>Execution</span></div>
-    <div class="field">
-      <label>Target launch / embargo date</label>
-      <input type="date" id="date" />
+    <button class="submit-btn" id="submit-btn" onclick="submitForm()">Send brief to Slack →</button>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="success" id="success">
+    <div class="success-top">
+      <h2>Brief submitted ✓</h2>
+      <p>Your request is being processed by our PR team</p>
     </div>
-    <div class="field">
-      <label>Available assets</label>
-      <select id="assets">
-        <option value="">Select...</option>
-        <option>Press release draft ready</option>
-        <option>Chef quotes approved</option>
-        <option>Photography available</option>
-        <option>Video available</option>
-        <option>Data brief ready</option>
-        <option>None yet</option>
-      </select>
-    </div>
-    <div class="field full">
-      <label>Additional context</label>
-      <textarea id="context" style="min-height:70px" placeholder="e.g. First Pride campaign. No LGBTQ+ order data yet. Cam Ferrin aligned on brand angle."></textarea>
+    <div class="success-body">
+      <p>
+        Thank you! Your brief for <strong id="success-name"></strong> has been received.<br>
+        Our PR specialist will review it and come back to you with a full strategy on a new Notion page — including target outlets, journalist contacts, pitch angles, and recommended next steps.
+      </p>
+      <button class="new-btn" onclick="resetForm()">Submit another campaign →</button>
     </div>
   </div>
 
-  <button class="submit-btn" id="submit-btn" onclick="submit()">Generate PR strategy →</button>
-
-  <!-- Loading -->
-  <div class="loading" id="loading">
-    <div class="spinner"><span></span><span></span><span></span></div>
-    <p>Generating your PR strategy…</p>
-    <div class="loading-steps">
-      <div class="loading-step active" id="step1">Analyzing campaign brief</div>
-      <div class="loading-step" id="step2">Building PR strategy memo</div>
-      <div class="loading-step" id="step3">Saving to Notion</div>
-    </div>
-  </div>
-
-  <!-- Output -->
-  <div class="output-wrap" id="output-wrap">
-    <div class="notion-banner" id="notion-banner">
-      <div>
-        <div class="notion-banner-text">✓ Strategy saved to Notion</div>
-        <div class="notion-banner-sub">A new page was created in the PR Strategy Assistant hub</div>
-      </div>
-      <a class="notion-link" id="notion-url" href="#" target="_blank">Open in Notion →</a>
-    </div>
-    <div class="memo-card">
-      <div class="memo-top">
-        <span class="memo-tag">PR Strategy Memo</span>
-        <span class="memo-name" id="memo-name"></span>
-      </div>
-      <div class="memo-body" id="memo-body"></div>
-      <div class="memo-footer">
-        <button class="copy-btn" onclick="copyMemo()">Copy memo</button>
-      </div>
-    </div>
-  </div>
 </div>
 
 <script>
+const SLACK_WEBHOOK = 'https://hooks.slack.com/services/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';
+
 document.querySelectorAll('#markets .pill').forEach(p => p.addEventListener('click', () => p.classList.toggle('on')));
 document.querySelectorAll('#priority .pill').forEach(p => p.addEventListener('click', () => {
   document.querySelectorAll('#priority .pill').forEach(x => x.className = 'pill');
   p.classList.add('on-' + p.dataset.t);
 }));
+
 function getMarkets() { return [...document.querySelectorAll('#markets .pill.on')].map(p => p.dataset.v).join(', ') || 'National'; }
 function getPriority() { const a = document.querySelector('#priority .pill[class*="on-"]'); return a ? a.textContent.trim() : 'Not specified'; }
 
-function animateSteps() {
-  let step = 1;
-  const steps = [document.getElementById('step1'), document.getElementById('step2'), document.getElementById('step3')];
-  const delays = [0, 3000, 8000];
-  delays.forEach((d, i) => setTimeout(() => {
-    if (i > 0) steps[i-1].className = 'loading-step done';
-    steps[i].className = 'loading-step active';
-  }, d));
-}
-
-async function submit() {
-  const submitterName = document.getElementById('submitter-name').value.trim();
+async function submitForm() {
   const name = document.getElementById('name').value.trim();
+  const submitterName = document.getElementById('submitter-name').value.trim();
   const msg = document.getElementById('message').value.trim();
   if (!submitterName) { alert('Please enter your name.'); document.getElementById('submitter-name').focus(); return; }
   if (!name || !msg) { alert('Campaign name and key message are required.'); return; }
 
   const btn = document.getElementById('submit-btn');
   btn.disabled = true;
-  btn.textContent = 'Generating…';
-  document.getElementById('loading').classList.add('show');
-  document.getElementById('output-wrap').classList.remove('show');
-  animateSteps();
+  btn.textContent = 'Sending to Slack…';
+
+  const email = document.getElementById('submitter-email').value.trim();
+  const type = document.getElementById('type').value;
+  const proof = document.getElementById('proof').value.trim();
+  const cultural = document.getElementById('cultural').value.trim();
+  const spokesperson = document.getElementById('spokesperson').value.trim();
+  const audience = document.getElementById('audience').value.trim();
+  const markets = getMarkets();
+  const priority = getPriority();
+  const launchDate = document.getElementById('date').value;
+  const assets = document.getElementById('assets').value;
+  const context = document.getElementById('context').value.trim();
+
+  const slackMessage = {
+    blocks: [
+      {
+        type: "header",
+        text: { type: "plain_text", text: "📋 New PR Brief — " + name, emoji: true }
+      },
+      {
+        type: "section",
+        fields: [
+          { type: "mrkdwn", text: "*Submitted by:*\n" + submitterName + (email ? ' (' + email + ')' : '') },
+          { type: "mrkdwn", text: "*Type:*\n" + (type || 'Not specified') },
+          { type: "mrkdwn", text: "*Priority:*\n" + priority },
+          { type: "mrkdwn", text: "*Markets:*\n" + markets },
+          { type: "mrkdwn", text: "*Spokesperson:*\n" + (spokesperson || 'Not specified') },
+          { type: "mrkdwn", text: "*Launch date:*\n" + (launchDate || 'Not specified') }
+        ]
+      },
+      { type: "divider" },
+      {
+        type: "section",
+        text: { type: "mrkdwn", text: "*Key message:*\n" + msg }
+      },
+      proof ? {
+        type: "section",
+        text: { type: "mrkdwn", text: "*Proof points:*\n" + proof }
+      } : null,
+      cultural ? {
+        type: "section",
+        text: { type: "mrkdwn", text: "*Why now:*\n" + cultural }
+      } : null,
+      assets ? {
+        type: "section",
+        text: { type: "mrkdwn", text: "*Assets available:*\n" + assets }
+      } : null,
+      context ? {
+        type: "section",
+        text: { type: "mrkdwn", text: "*Additional context:*\n" + context }
+      } : null,
+      { type: "divider" },
+      {
+        type: "section",
+        text: { type: "mrkdwn", text: "👉 *Drop this message in the Claude PR Strategy Project to generate the full strategy + Notion page automatically.*" }
+      }
+    ].filter(Boolean)
+  };
 
   try {
-    const res = await fetch('/api/generate', {
+    await fetch(SLACK_WEBHOOK, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        submitterName,
-        email: document.getElementById('submitter-email').value.trim(),
-        campaignName: name,
-        type: document.getElementById('type').value,
-        keyMessage: msg,
-        proofPoints: document.getElementById('proof').value.trim(),
-        culturalRelevance: document.getElementById('cultural').value.trim(),
-        spokesperson: document.getElementById('spokesperson').value.trim(),
-        audience: document.getElementById('audience').value.trim(),
-        markets: getMarkets(),
-        priority: getPriority(),
-        launchDate: document.getElementById('date').value,
-        assets: document.getElementById('assets').value,
-        context: document.getElementById('context').value.trim()
-      })
+      body: JSON.stringify(slackMessage),
+      mode: 'no-cors'
     });
 
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'Unknown error');
-
-    // Mark all steps done
-    ['step1','step2','step3'].forEach(id => document.getElementById(id).className = 'loading-step done');
-
-    // Render output
-    document.getElementById('memo-name').textContent = name;
-    document.getElementById('memo-body').innerHTML = renderMemo(data.strategy);
-    if (data.notionPageUrl) document.getElementById('notion-url').href = data.notionPageUrl;
-    document.getElementById('loading').classList.remove('show');
-    document.getElementById('output-wrap').classList.add('show');
-    document.getElementById('output-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById('success-name').textContent = name;
+    document.getElementById('form-wrap').style.display = 'none';
+    document.getElementById('success').classList.add('show');
+    document.getElementById('success').scrollIntoView({ behavior: 'smooth' });
   } catch(e) {
-    document.getElementById('loading').classList.remove('show');
-    alert('Error: ' + e.message);
+    alert('Something went wrong. Please try again.');
+    btn.disabled = false;
+    btn.textContent = 'Send brief to Slack →';
   }
-
-  btn.disabled = false;
-  btn.textContent = 'Generate PR strategy →';
 }
 
-function renderMemo(text) {
-  return text.split('\n').map(line => {
-    if (line.startsWith('### ')) return `<h3>${line.slice(4)}</h3>`;
-    if (/^[-*] /.test(line)) return `<li>${line.slice(2).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')}</li>`;
-    if (/^\d+\. /.test(line)) return `<li>${line.replace(/^\d+\. /,'').replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')}</li>`;
-    if (!line.trim()) return '';
-    return `<p>${line.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')}</p>`;
-  }).join('').replace(/(<li>.*?<\/li>)+/gs, m => `<ul>${m}</ul>`);
-}
-
-function copyMemo() {
-  navigator.clipboard.writeText(document.getElementById('memo-body').innerText).then(() => {
-    const b = document.querySelector('.copy-btn');
-    b.textContent = 'Copied!';
-    setTimeout(() => b.textContent = 'Copy memo', 2000);
-  });
+function resetForm() {
+  document.getElementById('form-wrap').style.display = 'block';
+  document.getElementById('success').classList.remove('show');
+  document.getElementById('name').value = '';
+  document.getElementById('message').value = '';
+  document.getElementById('submit-btn').disabled = false;
+  document.getElementById('submit-btn').textContent = 'Send brief to Slack →';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 </script>
 </body>
