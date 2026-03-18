@@ -8,8 +8,8 @@
 <style>
   :root {
     --black: #0e0e0e; --white: #fafaf8; --cream: #f4f1eb;
-    --mid-gray: #7a7672; --accent: #c85a1a; --border: #e0dcd4;
-    --success: #2d6a4f;
+    --mid-gray: #7a7672; --warm-gray: #c8c4bb; --accent: #c85a1a;
+    --border: #e0dcd4; --success: #2d6a4f;
     --font-display: 'DM Serif Display', Georgia, serif;
     --font-body: 'DM Sans', system-ui, sans-serif;
   }
@@ -20,12 +20,7 @@
   .header h1 { font-family: var(--font-display); font-size: 2.2rem; font-weight: 400; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 4px; }
   .header h1 em { font-style: italic; color: #d4895a; }
   .header p { font-size: 13px; color: #999; text-transform: uppercase; letter-spacing: 0.04em; }
-  .badge { font-size: 11px; font-weight: 500; background: var(--accent); color: #fff; padding: 5px 12px; border-radius: 100px; letter-spacing: 0.06em; text-transform: uppercase; }
-
-  .steps-bar { background: #1a1a1a; padding: 0.75rem 3rem; display: flex; gap: 2rem; align-items: center; }
-  .step { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #888; }
-  .step b { width: 20px; height: 20px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 11px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-style: normal; }
-  .step-sep { color: #333; }
+  .badge { font-size: 11px; font-weight: 500; background: var(--accent); color: #fff; padding: 5px 12px; border-radius: 100px; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
 
   .container { max-width: 960px; margin: 0 auto; padding: 2.5rem 2rem; }
   .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -48,25 +43,50 @@
 
   .submit-btn { margin-top: 2rem; width: 100%; font-family: var(--font-display); font-size: 1.15rem; font-style: italic; color: #fff; background: var(--accent); border: none; border-radius: 8px; padding: 16px; cursor: pointer; transition: background 0.2s; }
   .submit-btn:hover { background: #b04d16; }
-  .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
-  /* Success state */
-  .success-box { display: none; margin-top: 2rem; background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-  .success-top { background: var(--black); padding: 1.25rem 1.75rem; display: flex; align-items: center; gap: 12px; }
-  .success-tag { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; background: var(--success); color: #fff; padding: 3px 10px; border-radius: 100px; }
-  .success-campaign { font-family: var(--font-display); font-size: 1rem; font-style: italic; color: #fff; }
-  .success-body { padding: 1.5rem 1.75rem; }
-  .success-body h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 400; margin-bottom: 0.5rem; }
-  .success-body p { font-size: 14px; color: var(--mid-gray); line-height: 1.6; margin-bottom: 1rem; }
-  .notion-link { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--success); text-decoration: none; border: 1px solid #b7dfc9; background: #edf7f2; padding: 8px 14px; border-radius: 6px; margin-bottom: 1.5rem; }
+  /* Loading */
+  .loading { display: none; margin-top: 2rem; background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 2.5rem; text-align: center; }
+  .loading.show { display: block; }
+  .spinner { display: inline-flex; gap: 6px; margin-bottom: 1rem; }
+  .spinner span { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: bounce 1.2s infinite ease-in-out; }
+  .spinner span:nth-child(2) { animation-delay: 0.2s; }
+  .spinner span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes bounce { 0%,80%,100%{transform:scale(0.6);opacity:0.4} 40%{transform:scale(1);opacity:1} }
+  .loading p { font-size: 14px; color: var(--mid-gray); }
+  .loading-steps { margin-top: 1rem; display: flex; flex-direction: column; gap: 8px; align-items: center; }
+  .loading-step { font-size: 13px; color: var(--warm-gray); display: flex; align-items: center; gap: 8px; }
+  .loading-step.done { color: var(--success); }
+  .loading-step.active { color: var(--accent); font-weight: 500; }
+
+  /* Output */
+  .output-wrap { display: none; margin-top: 2rem; }
+  .output-wrap.show { display: block; }
+
+  .notion-banner { background: #edf7f2; border: 1px solid #b7dfc9; border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .notion-banner-text { font-size: 14px; color: var(--success); font-weight: 500; }
+  .notion-banner-sub { font-size: 12px; color: #4a9470; margin-top: 2px; }
+  .notion-link { font-size: 13px; font-weight: 500; color: var(--success); text-decoration: none; border: 1px solid #b7dfc9; background: #fff; padding: 8px 16px; border-radius: 6px; white-space: nowrap; }
   .notion-link:hover { background: #dff0e8; }
-  .saved-row { font-size: 13px; color: var(--mid-gray); padding: 0.75rem 0; border-top: 1px solid var(--border); display: flex; gap: 8px; }
-  .saved-row strong { color: var(--black); min-width: 120px; font-weight: 500; }
+
+  .memo-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .memo-top { background: var(--black); color: var(--white); padding: 1.25rem 1.75rem; display: flex; align-items: center; gap: 14px; }
+  .memo-tag { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; background: var(--accent); color: #fff; padding: 3px 10px; border-radius: 100px; }
+  .memo-name { font-family: var(--font-display); font-size: 1.05rem; font-style: italic; }
+  .memo-body { padding: 1.75rem; font-size: 14.5px; line-height: 1.75; }
+  .memo-body h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 400; margin: 1.5rem 0 0.5rem; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+  .memo-body h3:first-child { margin-top: 0; }
+  .memo-body p { margin-bottom: 0.75rem; }
+  .memo-body ul { padding-left: 1.25rem; margin-bottom: 0.75rem; }
+  .memo-body li { margin-bottom: 4px; }
+  .memo-body strong { font-weight: 500; }
+  .memo-footer { border-top: 1px solid var(--border); padding: 1rem 1.75rem; display: flex; justify-content: flex-end; }
+  .copy-btn { font-family: var(--font-body); font-size: 13px; color: var(--mid-gray); background: none; border: 1px solid var(--border); border-radius: 6px; padding: 7px 16px; cursor: pointer; transition: all 0.15s; }
+  .copy-btn:hover { color: var(--black); border-color: var(--warm-gray); }
 
   @media(max-width:640px) {
     .header { padding: 1.5rem; flex-direction: column; align-items: flex-start; gap: 1rem; }
     .header h1 { font-size: 1.6rem; }
-    .steps-bar { display: none; }
     .form-grid { grid-template-columns: 1fr; }
     .field.full, .sec { grid-column: 1; }
     .container { padding: 1.5rem 1rem; }
@@ -81,16 +101,6 @@
     <p>CookUnity Communications — Internal Tool</p>
   </div>
   <span class="badge">Powered by Claude</span>
-</div>
-
-<div class="steps-bar">
-  <div class="step"><b>1</b> Fill in the brief</div>
-  <span class="step-sep">→</span>
-  <div class="step"><b>2</b> Submit — saved to Notion instantly</div>
-  <span class="step-sep">→</span>
-  <div class="step"><b>3</b> Claude generates the full PR strategy</div>
-  <span class="step-sep">→</span>
-  <div class="step"><b>4</b> Strategy saved back to Notion</div>
 </div>
 
 <div class="container">
@@ -125,7 +135,7 @@
         <option>Product launch</option>
         <option>Corporate news</option>
         <option>Seasonal campaign</option>
-        <option>Reactive / cultural moment pitch</option>
+        <option>Reactive pitch</option>
       </select>
     </div>
     <div class="field full">
@@ -134,11 +144,11 @@
     </div>
     <div class="field full">
       <label>Supporting proof points — data, stats, facts (one per line)</label>
-      <textarea id="proof" placeholder="e.g. 12 LGBTQ+ chefs on platform&#10;Pride-related orders grew 28% YoY&#10;Partnership with [org]"></textarea>
+      <textarea id="proof" placeholder="e.g. 12 LGBTQ+ chefs on platform&#10;Pride orders grew 28% YoY&#10;Partnership with [org]"></textarea>
     </div>
     <div class="field full">
       <label>Cultural relevance / why now</label>
-      <textarea id="cultural" style="min-height:70px" placeholder="e.g. Pride Month is June. LGBTQ+ representation in food media is a growing editorial conversation."></textarea>
+      <textarea id="cultural" style="min-height:70px" placeholder="e.g. Pride Month is June. LGBTQ+ representation in food media is growing."></textarea>
     </div>
 
     <div class="sec"><span>Targeting</span></div>
@@ -148,7 +158,7 @@
     </div>
     <div class="field">
       <label>Target audience</label>
-      <input type="text" id="audience" placeholder="e.g. LGBTQ+ community, food media, general consumer" />
+      <input type="text" id="audience" placeholder="e.g. LGBTQ+ community, food media" />
     </div>
     <div class="field full">
       <label>Market scope</label>
@@ -191,28 +201,42 @@
       </select>
     </div>
     <div class="field full">
-      <label>Additional context — past campaigns, sensitivities, agency notes</label>
-      <textarea id="context" style="min-height:70px" placeholder="e.g. First Pride campaign. No data yet on LGBTQ+ chef orders. Cam Ferrin aligned on brand angle."></textarea>
+      <label>Additional context</label>
+      <textarea id="context" style="min-height:70px" placeholder="e.g. First Pride campaign. No LGBTQ+ order data yet. Cam Ferrin aligned on brand angle."></textarea>
     </div>
   </div>
 
-  <button class="submit-btn" id="submit-btn" onclick="submitBrief()">Submit brief and generate PR strategy →</button>
+  <button class="submit-btn" id="submit-btn" onclick="submit()">Generate PR strategy →</button>
 
-  <!-- Success state -->
-  <div class="success-box" id="success-box">
-    <div class="success-top">
-      <span class="success-tag">✓ Brief submitted</span>
-      <span class="success-campaign" id="success-name"></span>
+  <!-- Loading -->
+  <div class="loading" id="loading">
+    <div class="spinner"><span></span><span></span><span></span></div>
+    <p>Generating your PR strategy…</p>
+    <div class="loading-steps">
+      <div class="loading-step active" id="step1">Analyzing campaign brief</div>
+      <div class="loading-step" id="step2">Building PR strategy memo</div>
+      <div class="loading-step" id="step3">Saving to Notion</div>
     </div>
-    <div class="success-body">
-      <h3>Your brief has been saved to Notion.</h3>
-      <p>Now open the Notion page below — Claude will read the brief and generate the full PR strategy memo directly in Notion, including outlets, journalists, pitch angles, and timing recommendations.</p>
+  </div>
 
-      <a class="notion-link" id="notion-page-link" href="#" target="_blank">
-        → Open in Notion to generate strategy
-      </a>
-
-      <div id="brief-summary"></div>
+  <!-- Output -->
+  <div class="output-wrap" id="output-wrap">
+    <div class="notion-banner" id="notion-banner">
+      <div>
+        <div class="notion-banner-text">✓ Strategy saved to Notion</div>
+        <div class="notion-banner-sub">A new page was created in the PR Strategy Assistant hub</div>
+      </div>
+      <a class="notion-link" id="notion-url" href="#" target="_blank">Open in Notion →</a>
+    </div>
+    <div class="memo-card">
+      <div class="memo-top">
+        <span class="memo-tag">PR Strategy Memo</span>
+        <span class="memo-name" id="memo-name"></span>
+      </div>
+      <div class="memo-body" id="memo-body"></div>
+      <div class="memo-footer">
+        <button class="copy-btn" onclick="copyMemo()">Copy memo</button>
+      </div>
     </div>
   </div>
 </div>
@@ -223,67 +247,93 @@ document.querySelectorAll('#priority .pill').forEach(p => p.addEventListener('cl
   document.querySelectorAll('#priority .pill').forEach(x => x.className = 'pill');
   p.classList.add('on-' + p.dataset.t);
 }));
-
 function getMarkets() { return [...document.querySelectorAll('#markets .pill.on')].map(p => p.dataset.v).join(', ') || 'National'; }
 function getPriority() { const a = document.querySelector('#priority .pill[class*="on-"]'); return a ? a.textContent.trim() : 'Not specified'; }
 
-async function submitBrief() {
-  const name = document.getElementById('name').value.trim();
-  const submitterName = document.getElementById('submitter-name').value.trim();
-  const msg = document.getElementById('message').value.trim();
+function animateSteps() {
+  let step = 1;
+  const steps = [document.getElementById('step1'), document.getElementById('step2'), document.getElementById('step3')];
+  const delays = [0, 3000, 8000];
+  delays.forEach((d, i) => setTimeout(() => {
+    if (i > 0) steps[i-1].className = 'loading-step done';
+    steps[i].className = 'loading-step active';
+  }, d));
+}
 
+async function submit() {
+  const submitterName = document.getElementById('submitter-name').value.trim();
+  const name = document.getElementById('name').value.trim();
+  const msg = document.getElementById('message').value.trim();
   if (!submitterName) { alert('Please enter your name.'); document.getElementById('submitter-name').focus(); return; }
   if (!name || !msg) { alert('Campaign name and key message are required.'); return; }
 
   const btn = document.getElementById('submit-btn');
   btn.disabled = true;
-  btn.textContent = 'Saving to Notion...';
+  btn.textContent = 'Generating…';
+  document.getElementById('loading').classList.add('show');
+  document.getElementById('output-wrap').classList.remove('show');
+  animateSteps();
 
-  const markets = getMarkets();
-  const priority = getPriority();
-  const type = document.getElementById('type').value;
-  const proof = document.getElementById('proof').value.trim();
-  const cultural = document.getElementById('cultural').value.trim();
-  const spokesperson = document.getElementById('spokesperson').value.trim();
-  const audience = document.getElementById('audience').value.trim();
-  const context = document.getElementById('context').value.trim();
-  const launchDate = document.getElementById('date').value;
-  const assets = document.getElementById('assets').value;
-  const email = document.getElementById('submitter-email').value.trim();
+  try {
+    const res = await fetch('/api/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        submitterName,
+        email: document.getElementById('submitter-email').value.trim(),
+        campaignName: name,
+        type: document.getElementById('type').value,
+        keyMessage: msg,
+        proofPoints: document.getElementById('proof').value.trim(),
+        culturalRelevance: document.getElementById('cultural').value.trim(),
+        spokesperson: document.getElementById('spokesperson').value.trim(),
+        audience: document.getElementById('audience').value.trim(),
+        markets: getMarkets(),
+        priority: getPriority(),
+        launchDate: document.getElementById('date').value,
+        assets: document.getElementById('assets').value,
+        context: document.getElementById('context').value.trim()
+      })
+    });
 
-  // Save to localStorage as backup
-  const entry = { name, submitterName, email, type, msg, proof, cultural, spokesperson, audience, markets, priority, launchDate, assets, context, submittedAt: new Date().toISOString() };
-  const stored = JSON.parse(localStorage.getItem('cu_pr_briefs') || '[]');
-  stored.unshift(entry);
-  localStorage.setItem('cu_pr_briefs', JSON.stringify(stored.slice(0, 50)));
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Unknown error');
 
-  // Show success state
-  document.getElementById('success-name').textContent = name;
+    // Mark all steps done
+    ['step1','step2','step3'].forEach(id => document.getElementById(id).className = 'loading-step done');
 
-  const notionUrl = 'https://www.notion.so/cookunity/PR-Strategy-Assistant-Architecture-Framework-Prompt-System-3266c6b786ba8117a661e345babc2ccf';
-  document.getElementById('notion-page-link').href = notionUrl;
+    // Render output
+    document.getElementById('memo-name').textContent = name;
+    document.getElementById('memo-body').innerHTML = renderMemo(data.strategy);
+    if (data.notionPageUrl) document.getElementById('notion-url').href = data.notionPageUrl;
+    document.getElementById('loading').classList.remove('show');
+    document.getElementById('output-wrap').classList.add('show');
+    document.getElementById('output-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } catch(e) {
+    document.getElementById('loading').classList.remove('show');
+    alert('Error: ' + e.message);
+  }
 
-  document.getElementById('brief-summary').innerHTML = [
-    ['Campaign', name],
-    ['Submitted by', submitterName + (email ? ' (' + email + ')' : '')],
-    ['Type', type || 'Not specified'],
-    ['Priority', priority],
-    ['Markets', markets],
-    ['Spokesperson', spokesperson || 'Not specified'],
-    ['Launch date', launchDate || 'Not specified'],
-    ['Assets', assets || 'Not specified'],
-    ['Key message', msg],
-    proof && ['Proof points', proof],
-    cultural && ['Why now', cultural],
-    context && ['Additional context', context],
-  ].filter(Boolean).map(([label, val]) =>
-    `<div class="saved-row"><strong>${label}</strong>${val}</div>`
-  ).join('');
+  btn.disabled = false;
+  btn.textContent = 'Generate PR strategy →';
+}
 
-  document.getElementById('success-box').style.display = 'block';
-  document.getElementById('success-box').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+function renderMemo(text) {
+  return text.split('\n').map(line => {
+    if (line.startsWith('### ')) return `<h3>${line.slice(4)}</h3>`;
+    if (/^[-*] /.test(line)) return `<li>${line.slice(2).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')}</li>`;
+    if (/^\d+\. /.test(line)) return `<li>${line.replace(/^\d+\. /,'').replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')}</li>`;
+    if (!line.trim()) return '';
+    return `<p>${line.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')}</p>`;
+  }).join('').replace(/(<li>.*?<\/li>)+/gs, m => `<ul>${m}</ul>`);
+}
 
-  btn.textContent = 'Brief submitted ✓';
+function copyMemo() {
+  navigator.clipboard.writeText(document.getElementById('memo-body').innerText).then(() => {
+    const b = document.querySelector('.copy-btn');
+    b.textContent = 'Copied!';
+    setTimeout(() => b.textContent = 'Copy memo', 2000);
+  });
 }
 </script>
 </body>
