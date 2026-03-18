@@ -14,7 +14,6 @@
     --mid-gray: #7a7672;
     --accent: #c85a1a;
     --border: #e0dcd4;
-    --success: #2d6a4f;
     --font-display: 'DM Serif Display', Georgia, serif;
     --font-body: 'DM Sans', system-ui, sans-serif;
   }
@@ -27,13 +26,10 @@
   .header-left p { font-size: 13px; color: #999; font-weight: 300; letter-spacing: 0.04em; text-transform: uppercase; }
   .header-badge { font-size: 11px; font-weight: 500; background: var(--accent); color: var(--white); padding: 5px 12px; border-radius: 100px; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
 
-  .tabs { background: var(--black); border-top: 1px solid #222; display: flex; padding: 0 3rem; }
-  .tab { font-family: var(--font-body); font-size: 13px; color: #666; background: none; border: none; border-bottom: 2px solid transparent; padding: 12px 0; margin-right: 2rem; cursor: pointer; transition: all 0.15s; letter-spacing: 0.03em; }
-  .tab.active { color: var(--white); border-bottom-color: var(--accent); }
-  .tab:hover:not(.active) { color: #aaa; }
-
-  .view { display: none; }
-  .view.active { display: block; }
+  .how-it-works { background: #1a1a1a; color: #ccc; padding: 0.85rem 3rem; font-size: 13px; display: flex; align-items: center; gap: 2rem; }
+  .step { display: flex; align-items: center; gap: 8px; }
+  .step-num { width: 20px; height: 20px; border-radius: 50%; background: var(--accent); color: white; font-size: 11px; font-weight: 500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .step-arrow { color: #444; font-size: 16px; }
 
   .container { max-width: 960px; margin: 0 auto; padding: 2.5rem 2rem; }
 
@@ -62,83 +58,29 @@
   .pill.on-t2 { background: #7a5c1e; border-color: #7a5c1e; color: #fff; }
   .pill.on-t3 { background: #2d6a4f; border-color: #2d6a4f; color: #fff; }
 
-  .btn-row { display: flex; align-items: center; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; }
-  .btn-generate { font-family: var(--font-display); font-size: 1.1rem; font-style: italic; color: var(--white); background: var(--accent); border: none; border-radius: 8px; padding: 14px 36px; cursor: pointer; transition: background 0.2s, transform 0.1s; }
+  .btn-generate { font-family: var(--font-display); font-size: 1.15rem; font-style: italic; color: var(--white); background: var(--accent); border: none; border-radius: 8px; padding: 15px 40px; cursor: pointer; transition: background 0.2s, transform 0.1s; margin-top: 1.75rem; display: block; width: 100%; }
   .btn-generate:hover { background: #b04d16; }
-  .btn-generate:active { transform: scale(0.98); }
-  .btn-generate:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-generate:active { transform: scale(0.99); }
 
-  .save-indicator { font-size: 13px; color: var(--mid-gray); display: none; align-items: center; gap: 7px; }
-  .save-indicator.show { display: flex; }
-  .save-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--warm-gray); }
-  .save-dot.saving { background: #e6a817; animation: pulse 0.9s infinite; }
-  .save-dot.saved { background: var(--success); }
-  .save-dot.error { background: #c0392b; }
-  @keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+  .preview-card { margin-top: 2rem; background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: none; }
+  .preview-top { background: var(--black); color: var(--white); padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+  .preview-label { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #999; }
+  .preview-name { font-family: var(--font-display); font-size: 1rem; font-style: italic; }
+  .preview-body { padding: 1.25rem 1.5rem; font-size: 13px; color: var(--mid-gray); line-height: 1.6; }
+  .preview-body strong { color: var(--black); font-weight: 500; }
+  .preview-body .row { display: flex; gap: 8px; margin-bottom: 6px; }
+  .preview-body .row-label { min-width: 120px; color: var(--warm-gray); }
 
-  .output-wrap { margin-top: 2.5rem; background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-  .output-top { background: var(--black); color: var(--white); padding: 1.25rem 1.75rem; display: flex; align-items: center; gap: 14px; }
-  .output-tag { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; background: var(--accent); color: #fff; padding: 3px 10px; border-radius: 100px; }
-  .output-name { font-family: var(--font-display); font-size: 1.05rem; font-style: italic; }
-  .output-body { padding: 1.75rem; font-size: 14.5px; line-height: 1.75; }
-  .output-body h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 400; margin: 1.5rem 0 0.5rem; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
-  .output-body h3:first-child { margin-top: 0; }
-  .output-body p { margin-bottom: 0.75rem; }
-  .output-body ul, .output-body ol { padding-left: 1.25rem; margin-bottom: 0.75rem; }
-  .output-body li { margin-bottom: 3px; }
-  .output-body strong { font-weight: 500; }
+  .open-claude-btn { display: block; margin: 0; padding: 1.25rem 1.5rem; background: var(--accent); color: var(--white); font-family: var(--font-display); font-size: 1.05rem; font-style: italic; text-align: center; text-decoration: none; transition: background 0.2s; border: none; width: 100%; cursor: pointer; }
+  .open-claude-btn:hover { background: #b04d16; }
 
-  .thinking { padding: 2rem 1.75rem; display: flex; align-items: center; gap: 14px; color: var(--mid-gray); font-size: 13px; }
-  .dots span { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--warm-gray); animation: blink 1.3s infinite ease-in-out; margin-right: 4px; }
-  .dots span:nth-child(2) { animation-delay: 0.2s; }
-  .dots span:nth-child(3) { animation-delay: 0.4s; }
-  @keyframes blink { 0%,80%,100%{opacity:0.3;transform:scale(0.7)} 40%{opacity:1;transform:scale(1)} }
-
-  .copy-row { border-top: 1px solid var(--border); padding: 1rem 1.75rem; display: flex; justify-content: space-between; align-items: center; }
-  .notion-tag { font-size: 12px; color: var(--success); font-weight: 500; display: none; }
-  .notion-tag.show { display: block; }
-  .btn-copy { font-family: var(--font-body); font-size: 13px; color: var(--mid-gray); background: none; border: 1px solid var(--border); border-radius: 6px; padding: 7px 16px; cursor: pointer; transition: all 0.15s; }
-  .btn-copy:hover { color: var(--black); border-color: var(--warm-gray); }
-
-  /* Log */
-  .log-wrap { background: var(--white); border-radius: 12px; border: 1px solid var(--border); overflow: hidden; }
-  .log-top { padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-  .log-top h2 { font-family: var(--font-display); font-size: 1.2rem; font-weight: 400; }
-  .log-count { font-size: 13px; color: var(--mid-gray); }
-  .log-empty { padding: 3rem; text-align: center; color: var(--mid-gray); font-size: 14px; }
-  table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  th { text-align: left; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid-gray); padding: 10px 14px; border-bottom: 1px solid var(--border); }
-  td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
-  tr:last-child td { border-bottom: none; }
-  tr:hover td { background: var(--cream); cursor: pointer; }
-  .td-name { font-weight: 500; }
-  .td-by { font-size: 12px; color: var(--mid-gray); margin-top: 2px; }
-  .td-badge { display: inline-block; font-size: 11px; padding: 2px 9px; border-radius: 100px; background: #f0e4d8; color: var(--accent); }
-  .td-date { font-size: 12px; color: var(--mid-gray); white-space: nowrap; }
-
-  /* Modal */
-  .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 100; align-items: center; justify-content: center; padding: 2rem; }
-  .modal-bg.open { display: flex; }
-  .modal { background: var(--white); border-radius: 12px; max-width: 720px; width: 100%; max-height: 82vh; overflow-y: auto; }
-  .modal-top { background: var(--black); color: var(--white); padding: 1.25rem 1.75rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; border-radius: 12px 12px 0 0; }
-  .modal-title { font-family: var(--font-display); font-size: 1rem; font-style: italic; }
-  .modal-close { background: none; border: none; color: #888; font-size: 22px; cursor: pointer; line-height: 1; padding: 0 4px; }
-  .modal-close:hover { color: var(--white); }
-  .modal-body { padding: 1.5rem 1.75rem; font-size: 14px; line-height: 1.75; }
-  .modal-body h3 { font-family: var(--font-display); font-size: 1.05rem; margin: 1.25rem 0 0.4rem; padding-bottom: 5px; border-bottom: 1px solid var(--border); }
-  .modal-body h3:first-child { margin-top: 0; }
-  .modal-body p { margin-bottom: 0.6rem; }
-  .modal-body ul { padding-left: 1.2rem; margin-bottom: 0.6rem; }
-  .modal-body li { margin-bottom: 2px; }
-  .modal-meta { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 12px; color: var(--mid-gray); }
-
-  .notion-cta { background: #edf7f2; border: 1px solid #b7dfc9; border-radius: 8px; padding: 1rem 1.25rem; margin-top: 1.75rem; font-size: 13px; color: #1a4d32; line-height: 1.6; }
-  .notion-cta a { color: #1a4d32; font-weight: 500; }
+  .note { font-size: 12px; color: var(--mid-gray); text-align: center; padding: 0.75rem 1.5rem; border-top: 1px solid var(--border); line-height: 1.5; }
+  .note a { color: var(--accent); text-decoration: none; }
 
   @media (max-width: 640px) {
     .header { padding: 1.5rem; flex-direction: column; align-items: flex-start; }
     .header-left h1 { font-size: 1.6rem; }
-    .tabs { padding: 0 1.5rem; }
+    .how-it-works { padding: 0.85rem 1.5rem; flex-direction: column; align-items: flex-start; gap: 0.5rem; }
     .form-grid { grid-template-columns: 1fr; }
     .field.full, .section-head { grid-column: 1; }
     .container { padding: 1.5rem 1rem; }
@@ -152,16 +94,19 @@
     <h1>PR Strategy <em>Agent</em></h1>
     <p>CookUnity Communications &mdash; Internal Tool</p>
   </div>
-  <span class="header-badge">AI-Powered</span>
+  <span class="header-badge">Powered by Claude</span>
 </div>
 
-<div class="tabs">
-  <button class="tab active" onclick="switchTab('generate')">Generate Strategy</button>
-  <button class="tab" onclick="switchTab('log')">Submissions Log</button>
+<div class="how-it-works">
+  <div class="step"><span class="step-num">1</span> Fill in your campaign brief</div>
+  <span class="step-arrow">→</span>
+  <div class="step"><span class="step-num">2</span> Click "Generate strategy"</div>
+  <span class="step-arrow">→</span>
+  <div class="step"><span class="step-num">3</span> Claude opens with your brief pre-loaded</div>
+  <span class="step-arrow">→</span>
+  <div class="step"><span class="step-num">4</span> Get full PR strategy + auto-saved to Notion</div>
 </div>
 
-<!-- GENERATE -->
-<div class="view active" id="view-generate">
 <div class="container">
   <div class="form-grid">
 
@@ -178,7 +123,7 @@
     <div class="section-head"><span>Campaign basics</span></div>
     <div class="field">
       <label>Campaign name *</label>
-      <input type="text" id="name" placeholder="e.g. Diwali Indian Food Trends 2026" />
+      <input type="text" id="name" placeholder="e.g. Pride 2026" />
     </div>
     <div class="field">
       <label>Announcement type</label>
@@ -200,26 +145,29 @@
 
     <div class="field full">
       <label>Key message * — the single most important thing media should understand</label>
-      <textarea id="message" placeholder="e.g. Indian cuisine orders on CookUnity grew 40%+ YoY in 2025, making it the best platform to experience authentic Indian cooking from award-winning chefs"></textarea>
+      <textarea id="message" placeholder="e.g. CookUnity is celebrating Pride 2026 by spotlighting LGBTQ+ chefs on its platform and donating 10% of June revenue to community organizations"></textarea>
     </div>
+
     <div class="field full">
       <label>Supporting proof points — data, stats, facts (one per line)</label>
-      <textarea id="proof" placeholder="e.g. 1.3M Indian dishes delivered in 2025&#10;53% spike during Diwali week&#10;Atlanta grew 182.6% YoY"></textarea>
+      <textarea id="proof" placeholder="e.g. 12 LGBTQ+ chefs on platform&#10;Pride sales grew 28% YoY&#10;Partnership with [org name]"></textarea>
     </div>
+
     <div class="field full">
       <label>Cultural relevance / why now</label>
-      <textarea id="cultural" style="min-height:70px" placeholder="e.g. Diwali falls October 20–24. Indian cuisine is the fastest-growing cuisine category in the US."></textarea>
+      <textarea id="cultural" style="min-height:70px" placeholder="e.g. Pride Month is June. LGBTQ+ representation in food media is growing. CookUnity has a strong chef community story to tell."></textarea>
     </div>
 
     <div class="section-head"><span>Targeting</span></div>
     <div class="field">
       <label>Spokesperson</label>
-      <input type="text" id="spokesperson" placeholder="e.g. Chef Aarthi Sampath, Mateo Marietti" />
+      <input type="text" id="spokesperson" placeholder="e.g. Mateo Marietti, Chef [Name]" />
     </div>
     <div class="field">
       <label>Target audience</label>
-      <input type="text" id="audience" placeholder="e.g. Foodies, multicultural consumers" />
+      <input type="text" id="audience" placeholder="e.g. LGBTQ+ community, food media, general consumer" />
     </div>
+
     <div class="field full">
       <label>Market scope</label>
       <div class="pills" id="markets">
@@ -234,6 +182,7 @@
         <button class="pill" data-v="Canada">Canada</button>
       </div>
     </div>
+
     <div class="field full">
       <label>PR Priority</label>
       <div class="pills" id="priority">
@@ -262,65 +211,24 @@
     </div>
     <div class="field full">
       <label>Additional context — past campaigns, sensitivities, agency notes</label>
-      <textarea id="context" style="min-height:70px" placeholder="e.g. First Diwali campaign. No consumer survey data. Chef Aarthi confirmed available."></textarea>
+      <textarea id="context" style="min-height:70px" placeholder="e.g. First Pride campaign for CookUnity. No data yet on LGBTQ+ chef orders. Cam Ferrin aligned on brand angle."></textarea>
     </div>
   </div>
 
-  <div class="btn-row">
-    <button class="btn-generate" id="gen-btn" onclick="generate()">Generate PR strategy</button>
-    <div class="save-indicator" id="save-indicator">
-      <span class="save-dot" id="save-dot"></span>
-      <span id="save-text"></span>
-    </div>
-  </div>
+  <button class="btn-generate" onclick="generate()">Generate PR strategy →</button>
 
-  <div class="output-wrap" id="output" style="display:none">
-    <div class="output-top">
-      <span class="output-tag">PR Strategy Memo</span>
-      <span class="output-name" id="out-name"></span>
+  <div class="preview-card" id="preview">
+    <div class="preview-top">
+      <span class="preview-label">Ready to generate</span>
+      <span class="preview-name" id="preview-name"></span>
     </div>
-    <div class="output-body" id="out-body"></div>
-    <div class="copy-row">
-      <span class="notion-tag" id="notion-tag">✓ Saved to Notion</span>
-      <button class="btn-copy" onclick="copyOutput()">Copy memo</button>
-    </div>
-  </div>
-
-  <div class="notion-cta">
-    Every strategy you generate is automatically saved to the <a href="https://www.notion.so/cookunity/PR-Dashboard-2026-2b06c6b786ba81f69df7cf473d306ce7" target="_blank">PR Dashboard → Submissions Log</a> in Notion — including who submitted it, the full brief, and the complete strategy output.
-  </div>
-</div>
-</div>
-
-<!-- LOG -->
-<div class="view" id="view-log">
-<div class="container">
-  <div class="log-wrap">
-    <div class="log-top">
-      <h2>Submissions Log</h2>
-      <span class="log-count" id="log-count"></span>
-    </div>
-    <div id="log-body"><div class="log-empty">No submissions yet in this browser. All submissions are saved to Notion.</div></div>
-  </div>
-</div>
-</div>
-
-<!-- MODAL -->
-<div class="modal-bg" id="modal" onclick="if(event.target===this)this.classList.remove('open')">
-  <div class="modal">
-    <div class="modal-top">
-      <span class="modal-title" id="modal-title"></span>
-      <button class="modal-close" onclick="document.getElementById('modal').classList.remove('open')">×</button>
-    </div>
-    <div class="modal-body" id="modal-body"></div>
+    <div class="preview-body" id="preview-body"></div>
+    <button class="open-claude-btn" id="claude-btn" onclick="openClaude()">Open in Claude and generate full PR strategy →</button>
+    <div class="note">Claude will generate your complete PR strategy memo and automatically save it to the <a href="https://www.notion.so/cookunity/PR-Dashboard-2026-2b06c6b786ba81f69df7cf473d306ce7" target="_blank">Notion PR Dashboard</a>.</div>
   </div>
 </div>
 
 <script>
-const NOTION_DB = '67a30e77-8f52-47e7-b268-991cbc072611';
-const STORAGE_KEY = 'cu_pr_v2';
-
-// Pills
 document.querySelectorAll('#markets .pill').forEach(p => p.addEventListener('click', () => p.classList.toggle('on')));
 document.querySelectorAll('#priority .pill').forEach(p => p.addEventListener('click', () => {
   document.querySelectorAll('#priority .pill').forEach(x => x.className = 'pill');
@@ -330,63 +238,18 @@ document.querySelectorAll('#priority .pill').forEach(p => p.addEventListener('cl
 function getMarkets() { return [...document.querySelectorAll('#markets .pill.on')].map(p => p.dataset.v).join(', ') || 'National'; }
 function getPriority() { const a = document.querySelector('#priority .pill[class*="on-"]'); return a ? a.textContent.trim() : 'Not specified'; }
 
-function switchTab(t) {
-  document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
-  document.querySelectorAll('.view').forEach(x => x.classList.remove('active'));
-  document.querySelector(`.tab[onclick="switchTab('${t}')"]`).classList.add('active');
-  document.getElementById('view-' + t).classList.add('active');
-  if (t === 'log') renderLog();
-}
+let currentBrief = '';
 
-function setSaveStatus(state, text) {
-  const ind = document.getElementById('save-indicator');
-  const dot = document.getElementById('save-dot');
-  ind.className = 'save-indicator show';
-  dot.className = 'save-dot ' + state;
-  document.getElementById('save-text').textContent = text;
-}
-
-// Save to Notion via Claude API (acts as a proxy to write to Notion)
-async function saveToNotion(entry) {
-  setSaveStatus('saving', 'Saving to Notion...');
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 200,
-        system: `You are a Notion API assistant. Save the following PR strategy submission to the Notion database with ID ${NOTION_DB}. Confirm with just "saved".`,
-        messages: [{ role: 'user', content: JSON.stringify(entry) }]
-      })
-    });
-    // Also save locally as backup
-    const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    stored.unshift(entry);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(stored.slice(0, 100)));
-    setSaveStatus('saved', 'Saved to Notion ✓');
-    document.getElementById('notion-tag').classList.add('show');
-  } catch(e) {
-    const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    stored.unshift(entry);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(stored.slice(0, 100)));
-    setSaveStatus('saved', 'Saved locally ✓');
-  }
-}
-
-async function generate() {
+function generate() {
   const submitterName = document.getElementById('submitter-name').value.trim();
   const name = document.getElementById('name').value.trim();
   const msg = document.getElementById('message').value.trim();
+
   if (!submitterName) { alert('Please enter your name.'); document.getElementById('submitter-name').focus(); return; }
   if (!name || !msg) { alert('Campaign name and key message are required.'); return; }
 
-  const btn = document.getElementById('gen-btn');
-  btn.disabled = true; btn.textContent = 'Generating…';
-  document.getElementById('notion-tag').classList.remove('show');
-  document.getElementById('save-indicator').className = 'save-indicator';
-
-  const markets = getMarkets(), priority = getPriority();
+  const markets = getMarkets();
+  const priority = getPriority();
   const type = document.getElementById('type').value;
   const proof = document.getElementById('proof').value.trim();
   const cultural = document.getElementById('cultural').value.trim();
@@ -395,14 +258,17 @@ async function generate() {
   const context = document.getElementById('context').value.trim();
   const launchDate = document.getElementById('date').value;
   const assets = document.getElementById('assets').value;
+  const email = document.getElementById('submitter-email').value.trim();
 
-  document.getElementById('out-name').textContent = name;
-  document.getElementById('output').style.display = 'block';
-  document.getElementById('out-body').innerHTML = '<div class="thinking"><div class="dots"><span></span><span></span><span></span></div> Analyzing brief and building strategy…</div>';
-  document.getElementById('output').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  currentBrief = `You are the CookUnity PR Strategy Agent. A campaign owner has submitted a new brief. Please do TWO things:
 
-  const brief = `CAMPAIGN BRIEF — COOKUNITY PR DASHBOARD
-Submitted by: ${submitterName} ${document.getElementById('submitter-email').value.trim() ? '(' + document.getElementById('submitter-email').value.trim() + ')' : ''}
+1. Generate a complete PR Strategy Memo for this campaign
+2. Save the brief + strategy to the Notion PR Submissions Log database (ID: 67a30e77-8f52-47e7-b268-991cbc072611)
+
+---
+
+CAMPAIGN BRIEF:
+Submitted by: ${submitterName}${email ? ' (' + email + ')' : ''}
 Campaign Name: ${name}
 Announcement Type: ${type || 'Not specified'}
 Key Message: ${msg}
@@ -414,13 +280,14 @@ Market Scope: ${markets}
 PR Priority: ${priority}
 Target Launch / Embargo Date: ${launchDate || 'Not specified'}
 Available Assets: ${assets || 'Not specified'}
-Additional Context: ${context || 'None'}`;
+Additional Context: ${context || 'None'}
 
-  const system = `You are a senior PR strategist for CookUnity — America's first chef-to-you meal delivery platform. CookUnity features 180+ award-winning chefs (Marcus Samuelsson, Cat Cora, Rick Bayless, Einat Admony, Aarthi Sampath, Akhtar Nawab, Gaurav Raj, Meena Sreenivas, Jose Garces, Patrick Kriss), 300+ weekly dishes, 50M+ meals served, $605M revenue in 2025 (up from $111M in 2022), $250M from General Catalyst (Nov 2025), 8 kitchens across US and Canada, average chef earns $850K/year. Key past campaigns: Diwali Indian food trends, General Catalyst funding, NYGC TGL golf sponsorship, flavrs acquisition, Miami FC partnership, SuperBowl chef tips, Chef Aarthi new restaurant NYC.
+---
 
-Produce a complete PR Strategy Memo. Think like a senior strategist — direct, specific, named. No vague advice.
+INSTRUCTIONS FOR THE PR STRATEGY MEMO:
+You are a senior PR strategist for CookUnity — America's first chef-to-you meal delivery platform. 180+ award-winning chefs (Marcus Samuelsson, Cat Cora, Rick Bayless, Einat Admony, Aarthi Sampath, Akhtar Nawab, Gaurav Raj, Meena Sreenivas, Jose Garces), 300+ weekly dishes, 50M+ meals served, $605M revenue in 2025, $250M from General Catalyst (Nov 2025), 8 kitchens across US and Canada, average chef earns $850K/year.
 
-Use these EXACT section headers with ###:
+Produce the memo using EXACTLY these section headers:
 ### PR Opportunity Summary
 ### Why This Matters Now
 ### Recommended Strategy
@@ -433,92 +300,42 @@ Use these EXACT section headers with ###:
 ### Suggested Next Steps
 ### Draft Pitch Directions
 
-CRITICAL RULES:
-- "Target Outlets & Journalists": name SPECIFIC publications (Eater, Bon Appétit, Food & Wine, NYT Dining, WSJ, Forbes, TechCrunch, Axios, USA Today, Politico, local city outlets, trade pubs, podcasts like Sporkful/Gastropod) AND specific journalist names or beats at each outlet.
-- "Draft Pitch Directions": 2–3 outlines with a subject line and 2–3 sentence hook each.
-- Flag missing info explicitly. Never invent data not in the brief.`;
+In "Target Outlets & Journalists": name SPECIFIC publications AND journalist beats or real names.
+In "Draft Pitch Directions": 2-3 outlines with subject line + 2-3 sentence hook each.
+Flag missing info explicitly. Never invent data not in the brief.
 
-  let outputText = '';
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': '',
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
-      },
-      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 4000, system, messages: [{ role: 'user', content: brief }] })
-    });
-    const data = await res.json();
-    console.log('API response:', JSON.stringify(data).slice(0, 300));
-    if (data.error) {
-      document.getElementById('out-body').innerHTML = `<p style="color:#c00">API Error: ${data.error.message || JSON.stringify(data.error)}</p>`;
-      btn.disabled = false; btn.textContent = 'Generate PR strategy';
-      return;
-    }
-    if (!data.content || !data.content.length) {
-      document.getElementById('out-body').innerHTML = `<p style="color:#c00">Empty response from API. Raw: ${JSON.stringify(data).slice(0,200)}</p>`;
-      btn.disabled = false; btn.textContent = 'Generate PR strategy';
-      return;
-    }
-    outputText = data.content.map(c => c.text || '').join('');
-    renderMemo(outputText, 'out-body');
+After generating the memo, save a new page to the Notion database with:
+- Campaign Name: ${name}
+- Submitted By: ${submitterName}
+- Email: ${email || ''}
+- Announcement Type: ${type || 'Not specified'}
+- PR Priority: ${priority}
+- Market Scope: ${markets}
+- Spokesperson: ${spokesperson || ''}
+- Key Message: ${msg}
+- Strategy Output: [the full memo you generated]
+- Launch Date: ${launchDate || ''}`;
 
-    await saveToNotion({
-      id: Date.now(),
-      submittedBy: submitterName,
-      email: document.getElementById('submitter-email').value.trim(),
-      campaignName: name,
-      type: type || 'Not specified',
-      priority, markets, spokesperson,
-      keyMessage: msg, proofPoints: proof,
-      launchDate: launchDate || '',
-      strategyOutput: outputText,
-      submittedAt: new Date().toISOString()
-    });
-  } catch(e) {
-    document.getElementById('out-body').innerHTML = '<p style="color:#c00">Something went wrong. Please try again.</p>';
-  }
-  btn.disabled = false; btn.textContent = 'Generate PR strategy';
+  // Show preview
+  document.getElementById('preview-name').textContent = name;
+  document.getElementById('preview-body').innerHTML = `
+    <div class="row"><span class="row-label">Submitted by</span><strong>${submitterName}</strong></div>
+    <div class="row"><span class="row-label">Type</span><strong>${type || 'Not specified'}</strong></div>
+    <div class="row"><span class="row-label">Priority</span><strong>${priority}</strong></div>
+    <div class="row"><span class="row-label">Markets</span><strong>${markets}</strong></div>
+    <div class="row"><span class="row-label">Spokesperson</span><strong>${spokesperson || 'Not specified'}</strong></div>
+    <div class="row"><span class="row-label">Launch date</span><strong>${launchDate || 'Not specified'}</strong></div>
+    <div class="row"><span class="row-label">Key message</span><strong>${msg.slice(0, 100)}${msg.length > 100 ? '...' : ''}</strong></div>
+  `;
+  document.getElementById('preview').style.display = 'block';
+  document.getElementById('preview').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
-function renderMemo(text, targetId) {
-  const html = text.split('\n').map(line => {
-    if (line.startsWith('### ')) return `<h3>${line.slice(4)}</h3>`;
-    if (/^[-*] /.test(line)) return `<li>${line.slice(2).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')}</li>`;
-    if (/^\d+\. /.test(line)) return `<li>${line.replace(/^\d+\. /,'').replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')}</li>`;
-    if (!line.trim()) return '';
-    return `<p>${line.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')}</p>`;
-  }).join('').replace(/(<li>.*?<\/li>)+/gs, m => `<ul>${m}</ul>`);
-  document.getElementById(targetId).innerHTML = html;
-}
-
-function copyOutput() {
-  navigator.clipboard.writeText(document.getElementById('out-body').innerText).then(() => {
-    const b = document.querySelector('.btn-copy');
-    b.textContent = 'Copied!';
-    setTimeout(() => b.textContent = 'Copy memo', 2000);
-  });
-}
-
-function renderLog() {
-  const subs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-  document.getElementById('log-count').textContent = subs.length ? `${subs.length} local submission${subs.length !== 1 ? 's' : ''}` : '';
-  if (!subs.length) { document.getElementById('log-body').innerHTML = '<div class="log-empty">No local submissions yet. All submissions are permanently saved to Notion.</div>'; return; }
-  const rows = subs.map((s,i) => `<tr onclick="openModal(${i})"><td><div class="td-name">${s.campaignName}</div><div class="td-by">by ${s.submittedBy}</div></td><td><span class="td-badge">${s.type}</span></td><td>${s.priority}</td><td>${s.markets}</td><td class="td-date">${fmtDate(s.submittedAt)}</td></tr>`).join('');
-  document.getElementById('log-body').innerHTML = `<table><thead><tr><th>Campaign</th><th>Type</th><th>Priority</th><th>Markets</th><th>Date</th></tr></thead><tbody>${rows}</tbody></table>`;
-}
-
-function fmtDate(iso) { if(!iso) return ''; return new Date(iso).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); }
-
-function openModal(i) {
-  const s = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')[i];
-  if (!s) return;
-  document.getElementById('modal-title').textContent = s.campaignName;
-  document.getElementById('modal-body').innerHTML = `<div id="modal-memo"></div><div class="modal-meta">Submitted by ${s.submittedBy}${s.email?' ('+s.email+')':''} · ${fmtDate(s.submittedAt)}</div>`;
-  renderMemo(s.strategyOutput || '', 'modal-memo');
-  document.getElementById('modal').classList.add('open');
+function openClaude() {
+  const encoded = encodeURIComponent(currentBrief);
+  // Open Claude with the brief pre-loaded as a message
+  const claudeUrl = `https://claude.ai/new?q=${encoded}`;
+  window.open(claudeUrl, '_blank');
 }
 </script>
 </body>
