@@ -1,4 +1,4 @@
- const SLACK_WEBHOOK = process.env.SLACK_WEBHOOK_URL;
+  const SLACK_WEBHOOK = process.env.SLACK_WEBHOOK_URL;
 
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
